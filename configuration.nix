@@ -128,8 +128,11 @@
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
+    # Programs
     programs.firefox.enable = true;
     programs.steam.enable = true;
+    programs.steam.gamescopeSession.enable = true;
+    programs.gamemode.enable = true;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -150,7 +153,13 @@
         bitwarden
         discord
         vscodium
+        mangohud
+        protonup
     ];
-  
+
+    environment.sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    };
+
     system.stateVersion = "24.05"; # Did you read the comment?
 }
