@@ -158,9 +158,17 @@
         glxinfo
     ];
 
+    # for protonup
     environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     };
 
-    system.stateVersion = "24.05"; # Did you read the comment?
+    # Garbage Collect
+    nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+    };
+
+    system.stateVersion = "24.05";
 }
