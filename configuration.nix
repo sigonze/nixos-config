@@ -155,6 +155,7 @@
         vscodium
         mangohud
         protonup
+        glxinfo
     ];
 
     environment.sessionVariables = {
