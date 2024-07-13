@@ -48,7 +48,7 @@
     users.users.nicolas = {
         isNormalUser = true;
         description = "Nicolas";
-        extraGroups = [ "networkmanager" "wheel" "games" ];
+        extraGroups = [ "networkmanager" "wheel" "games" "scanner" "lp" ];
         packages = with pkgs; [
         #  thunderbird
         ];
@@ -108,6 +108,10 @@
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+    hardware.sane = {
+        enable = true;
+        extraBackends = [ pkgs.sane-airscan ];
+    };
 
     # Enable sound with pipewire.
     hardware.pulseaudio.enable = false;
