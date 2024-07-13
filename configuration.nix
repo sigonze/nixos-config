@@ -15,6 +15,8 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    
+    zramSwap.enable = true;
 
     networking.hostName = "nixos"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -24,7 +26,11 @@
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Enable networking
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+        enable = true;
+        # fix question mark icon in gnome
+        settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
+    };
 
     # Set your time zone.
     time.timeZone = "Europe/Paris";
@@ -57,7 +63,6 @@
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-  
     # Remove xterm
     services.xserver.excludePackages = [ pkgs.xterm ];
 

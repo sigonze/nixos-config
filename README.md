@@ -11,7 +11,7 @@ nixos-rebuild dry-build -I nixos-config=./configuration.nix
 
 Configuration deployment
 ```
-cp *.nix /etc/nixos
+sudo cp *.nix /etc/nixos
 sudo nixos-rebuild switch
 ```
 
