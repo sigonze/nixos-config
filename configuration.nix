@@ -106,8 +106,9 @@
     ]);
 
 
-    # Enable CUPS to print documents.
+    # Enable CUPS to print documents
     services.printing.enable = true;
+    # Enable sane and airscan for scanner
     hardware.sane = {
         enable = true;
         extraBackends = [ pkgs.sane-airscan ];
