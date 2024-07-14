@@ -5,8 +5,11 @@
 { config, pkgs, ... }:
 
 {
+    system.stateVersion = "24.05";
+
     imports = [ # Include the results of the hardware scan.
         ./hardware-configuration.nix
+        ./gnome.nix
     ];
 
     # Xanmod kernel
@@ -26,11 +29,7 @@
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Enable networking
-    networking.networkmanager = {
-        enable = true;
-        # fix question mark icon in gnome
-        settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
-    };
+    networking.networkmanager.enable = true;
 
     # Set your time zone.
     time.timeZone = "Europe/Paris";
@@ -72,39 +71,10 @@
     # Configure console keymap
     console.keyMap = "fr";
 
-    # Enable the GNOME Desktop Environment.
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
     #services.displayManager.autoLogin = {
     #    enable = true;
     #    user = "nicolas";
     #};
-       
-    # Debloat Gnome
-    environment.gnome.excludePackages = (with pkgs; [
-        gnome-tour
-        gnome-connections
-        snapshot
-        gnome.gnome-shell-extensions
-    ]) ++ (with pkgs.gnome; [
-        baobab          # disk usage analyzer
-        epiphany        # web browser
-        totem           # video player
-        yelp            # help viewer
-        #evince          # document viewer
-        geary           # email client
-        gnome-calendar 
-        gnome-characters
-        gnome-clocks 
-        gnome-contacts
-        gnome-font-viewer
-        gnome-logs
-        gnome-maps
-        gnome-music
-        gnome-weather
-        gnome-initial-setup
-    ]);
-
 
     # Enable CUPS to print documents
     services.printing.enable = true;
@@ -144,12 +114,7 @@
         #htop
         fastfetch
         #wget
-        
-        gnomeExtensions.dash-to-dock
-        gnomeExtensions.appindicator
-        gnomeExtensions.caffeine
-        gnome.gnome-tweaks
-        
+
         bitwarden
         discord
         vscodium
@@ -169,6 +134,4 @@
         dates = "weekly";
         options = "--delete-older-than 30d";
     };
-
-    system.stateVersion = "24.05";
 }
