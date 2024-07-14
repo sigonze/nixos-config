@@ -4,6 +4,8 @@
 
 { config, pkgs, ... }:
 
+let fanatecff = pkgs.linuxPackages.callPackage ./hid-fanatecff/default.nix {};
+in
 {
     system.stateVersion = "24.05";
 
@@ -13,7 +15,12 @@
     ];
 
     # Xanmod kernel
-    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
+    # Fanatec Wheel
+    boot.extraModulePackages = [ fanatecff ];
+    services.udev.packages = [ fanatecff ];
+    boot.kernelModules = [ "hid-fanatec" ];
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -106,7 +113,7 @@
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    environment.systemPackages = with pkgs; [     
+    environment.systemPackages = with pkgs; [
         vim
         git
         gnumake
@@ -114,11 +121,11 @@
         #htop
         fastfetch
         #wget
+        game-devices-udev-rules # Udev rules to make controllers available with non-sudo permissions
 
         bitwarden
         discord
         vscodium
-        mangohud
         protonup
         glxinfo
     ];
