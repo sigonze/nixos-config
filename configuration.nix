@@ -1,10 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, ... }:
 
-let fanatecff = pkgs.linuxPackages.callPackage ./hid-fanatecff/default.nix {};
+let fanatecff = config.boot.kernelPackages.callPackage ./hid-fanatecff/default.nix {};
 in
 {
     system.stateVersion = "24.05";
@@ -15,7 +11,8 @@ in
     ];
 
     # Xanmod kernel
-    # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];
@@ -25,16 +22,11 @@ in
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    
-    zramSwap = {
-        enable = true;
-        algorithm = "zstd";
-    };
 
-    services.fstrim = { 
-        enable = true;
-        interval = "daily";
-    };
+    # Enable zram
+    zramSwap.enable = true;
+    # Enable fstrim
+    services.fstrim.enable = true;
 
     networking.hostName = "nixos"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -135,7 +127,7 @@ in
         discord
         vscodium
         protonup
-        glxinfo
+        #glxinfo
     ];
 
     # for protonup
@@ -147,14 +139,11 @@ in
     nix.gc = {
         automatic = true;
         dates = "weekly";
-        options = "--delete-older-than 15d";
+        options = "--delete-older-than 7d";
     };
 
     # Optimise Store
-    nix.optimise = {
-        automatic = true;
-        dates     = ["daily"];
-    };
+    nix.optimise.automatic = true;
 
     # NixOS version diff
     system.activationScripts.report-changes = ''
