@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let fanatecff = pkgs.linuxPackages.callPackage ./hid-fanatecff/default.nix {};
 in
@@ -26,8 +26,15 @@ in
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     
-    # Enable zram
-    zramSwap.enable = true;
+    zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+    };
+
+    services.fstrim = { 
+        enable = true;
+        interval = "daily";
+    };
 
     networking.hostName = "nixos"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,9 +118,9 @@ in
     programs.steam.gamescopeSession.enable = true;
     programs.gamemode.enable = true;
 
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
+    # Packages
     environment.systemPackages = with pkgs; [
+        #busybox
         vim
         git
         gnumake
@@ -121,7 +128,8 @@ in
         #htop
         fastfetch
         #wget
-        game-devices-udev-rules # Udev rules to make controllers available with non-sudo permissions
+        nvd
+        #game-devices-udev-rules # Udev rules to make controllers available with non-sudo permissions
 
         bitwarden
         discord
@@ -135,10 +143,22 @@ in
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     };
 
-    # Garbage Collect
+    # Garbage Collection
     nix.gc = {
         automatic = true;
         dates = "weekly";
-        options = "--delete-older-than 30d";
+        options = "--delete-older-than 15d";
     };
+
+    # Optimise Store
+    nix.optimise = {
+        automatic = true;
+        dates     = ["daily"];
+    };
+
+    # NixOS version diff
+    system.activationScripts.report-changes = ''
+        PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+        nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+    '';
 }
