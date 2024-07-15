@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "gotzl";
     repo = "hid-fanatecff";
-    rev = "${version}";
+    rev = version;
     sha256 = "11dbhxxg2w1as7jp6dxf5n3xqgawz5xbd09a8z30d89yfk53qzic";
   };
 
