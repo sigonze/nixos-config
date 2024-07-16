@@ -73,10 +73,10 @@ in
     # Configure console keymap
     console.keyMap = "fr";
 
-    #services.displayManager.autoLogin = {
+    # services.displayManager.autoLogin = {
     #    enable = true;
     #    user = "nicolas";
-    #};
+    # };
 
     # Enable CUPS to print documents
     services.printing.enable = true;
@@ -137,14 +137,14 @@ in
     };
 
     # Garbage Collection
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-    };
+    # nix.gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 7d";
+    # };
 
     # Optimise Store
-    #nix.optimise.automatic = true;
+    # nix.optimise.automatic = true;
     nix.settings.auto-optimise-store = true;
 
     # NixOS version diff
