@@ -122,11 +122,14 @@ in
         linuxConsoleTools           # evdev-joystick for hid-fanatecff
         glxinfo
         vulkan-tools
+        pciutils
+        inxi
         protonup
 
         bitwarden
         discord
         vscodium
+        papirus-icon-theme
     ];
 
     # for protonup
