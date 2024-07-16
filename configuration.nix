@@ -18,7 +18,7 @@ in
     boot.extraModulePackages = [ fanatecff ];
     services.udev.packages = [ fanatecff ];
     boot.kernelModules = [ "hid-fanatec" ];
-    users.groups.games = {};  # needed by udev rules
+    users.groups.games = {};                    # needed by udev rules
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -29,13 +29,8 @@ in
     # Enable fstrim
     services.fstrim.enable = true;
 
-    networking.hostName = "nixos"; # Define your hostname.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
     # Enable networking
+    networking.hostName = "nixos";
     networking.networkmanager.enable = true;
 
     # Set your time zone.
@@ -123,7 +118,8 @@ in
         #wget
         nvd
 
-        game-devices-udev-rules
+        game-devices-udev-rules     # gamepads
+        linuxConsoleTools           # evdev-joystick for hid-fanatecff
         glxinfo
         vulkan-tools
         protonup
