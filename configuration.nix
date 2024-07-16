@@ -59,6 +59,10 @@ in
         extraGroups = [ "networkmanager" "wheel" "games" "scanner" "lp" ];
     };
 
+    programs.bash.promptInit = ''
+        PS1='\[\033[38;5;081m\]\u\[\033[38;5;245m\]@\[\033[38;5;206m\]\H \[\033[38;5;245m\]\w\[\e[0m\]\n$ '
+    '';
+
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
