@@ -5,7 +5,7 @@ in
 {
     system.stateVersion = "24.05";
 
-    imports = [ # Include the results of the hardware scan.
+    imports = [
         ./hardware-configuration.nix
         ./gnome.nix
     ];
@@ -145,7 +145,8 @@ in
     };
 
     # Optimise Store
-    nix.optimise.automatic = true;
+    #nix.optimise.automatic = true;
+    nix.settings.auto-optimise-store = true;
 
     # NixOS version diff
     system.activationScripts.report-changes = ''
