@@ -10,9 +10,10 @@ in
         ./gnome.nix
     ];
 
-    # Xanmod kernel
+    # Select Kernel
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     #boot.kernelPackages = pkgs.linuxPackages_latest;
+
 
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];

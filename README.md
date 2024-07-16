@@ -12,7 +12,7 @@ nixos-rebuild dry-build -I nixos-config=./configuration.nix
 Configuration deployment
 ```
 sudo cp -r * /etc/nixos
-sudo nixos-rebuild switch
+sudo nixos-rebuild boot
 ```
 
 List generations
