@@ -11,13 +11,14 @@ in
     ];
 
     # Xanmod kernel
-    #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    #boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];
     services.udev.packages = [ fanatecff ];
     boot.kernelModules = [ "hid-fanatec" ];
+    users.groups.games = {};  # needed by udev rules
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -55,7 +56,7 @@ in
         LC_TIME = "fr_FR.UTF-8";
     };
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
+    # User
     users.users.nicolas = {
         isNormalUser = true;
         description = "Nicolas";
@@ -121,13 +122,15 @@ in
         fastfetch
         #wget
         nvd
-        #game-devices-udev-rules # Udev rules to make controllers available with non-sudo permissions
+
+        game-devices-udev-rules
+        glxinfo
+        vulkan-tools
+        protonup
 
         bitwarden
         discord
         vscodium
-        protonup
-        #glxinfo
     ];
 
     # for protonup

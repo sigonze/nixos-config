@@ -1,11 +1,11 @@
 { lib, stdenv, fetchFromGitHub, kernel, kmod, linuxConsoleTools }:
 
-let moduledir = "lib/modules/${kernel.version}/kernel/drivers/hid";
+let moduledir = "lib/modules/${kernel.modDirVersion}/kernel/drivers/hid";
 in
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff";
   version = "0.1.1";
-  name = "hid-fanatecff-${version}-${kernel.version}";
+  name = "hid-fanatecff-${version}-${kernel.modDirVersion}";
 
   src = fetchFromGitHub {
     owner = "gotzl";
