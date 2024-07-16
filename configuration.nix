@@ -129,7 +129,6 @@ in
         bitwarden
         discord
         vscodium
-        papirus-icon-theme
     ];
 
     # for protonup

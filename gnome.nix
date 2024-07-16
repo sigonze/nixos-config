@@ -38,5 +38,6 @@
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
+        papirus-icon-theme
     ];
 }
