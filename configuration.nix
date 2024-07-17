@@ -134,6 +134,9 @@ in
         bitwarden
         discord
         vscodium
+        libreoffice
+        hunspell
+        hunspellDicts.fr-any
     ];
 
     # for protonup
@@ -154,7 +157,9 @@ in
 
     # NixOS version diff
     system.activationScripts.report-changes = ''
-        PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-        nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then 
+            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2) 
+        fi;
     '';
 }

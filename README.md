@@ -2,38 +2,34 @@
 
 Store my NixOS configuration file
 
-## Cheat sheet
+## How to use
 
 Configuration testing
 ```
-nixos-rebuild dry-build -I nixos-config=./configuration.nix
+make
+```
+
+Cleanup generation
+```
+make clean
 ```
 
 Configuration deployment
 ```
-sudo cp -r * /etc/nixos
-sudo nixos-rebuild boot
-```
-
-List generations
-```
-nixos-rebuild list-generations
+sudo make install
 ```
 
 Cleanup old generations
 ```
-sudo nix-collect-garbage -d
-sudo nixos-rebuild switch
+sudo make mr_proper
 ```
 
 ## Fanatec Wheel support
 Based on package [PhilT/hid-fanatecff](https://github.com/PhilT/nixos-files/blob/main/src/hid-fanatecff/default.nix)
 
 For new version
-1) update `version` based on latest tag [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/releases)
-2) update `sha256`
-
-How to get sha256
+1) update `version` using latest tag in [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags)
+2) update `sha256` based on the latest tag (here 0.1.1):
 ```
 nix-prefetch-url --unpack https://github.com/gotzl/hid-fanatecff/archive/refs/tags/0.1.1.tar.gz
 ```
