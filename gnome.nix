@@ -39,5 +39,6 @@
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
         # papirus-icon-theme
+        adw-gtk3
     ];
 }
