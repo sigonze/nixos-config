@@ -25,7 +25,7 @@ sudo make mr_proper
 ```
 
 ## Fanatec Wheel support
-Based on package [PhilT/hid-fanatecff](https://github.com/PhilT/nixos-files/blob/main/src/hid-fanatecff/default.nix)
+Based on deleted package [PhilT/hid-fanatecff](https://github.com/PhilT/nixos-files/blob/f986b126212368a8eab702d2cb28f234e3b4230a/src/hid-fanatecff/default.nix)
 
 For new version
 1) update `version` using latest tag in [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags)
