@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let fanatecff = config.boot.kernelPackages.callPackage ./hid-fanatecff/default.nix {};
+let fanatecff = config.boot.kernelPackages.callPackage ./hid-fanatecff.nix {};
 in
 {
     system.stateVersion = "24.05";
