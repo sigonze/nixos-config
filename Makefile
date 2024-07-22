@@ -13,4 +13,8 @@ install:
 
 mr_proper:
 	nix-collect-garbage -d
-	nixos-rebuild switch
+	nixos-rebuild boot
+
+update:
+	nix-channel --update
+	nixos-rebuild boot

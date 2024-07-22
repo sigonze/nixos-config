@@ -19,6 +19,11 @@ Configuration deployment
 sudo make install
 ```
 
+Update packages
+```
+sudo make update
+```
+
 Cleanup old generations
 ```
 sudo make mr_proper

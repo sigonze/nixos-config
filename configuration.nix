@@ -124,8 +124,8 @@ in
         gamescopeSession.enable = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
-    ];
-}; 
+        ];
+    }; 
 
     programs.gamemode.enable = true;
 
@@ -147,7 +147,7 @@ in
         vulkan-tools
         pciutils
         inxi
-        protonup
+        # protonup
 
         bitwarden
         discord
@@ -158,21 +158,21 @@ in
     ];
 
     # for protonup
-    environment.sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    };
+    # environment.sessionVariables = {
+    #     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    # };
 
     # Garbage Collection
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-    };
+    # nix.gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 7d";
+    # };
 
     # Auto system update
-    system.autoUpgrade.enable = true;
+    # system.autoUpgrade.enable = true;
 
     # Optimise Store
-    nix.optimise.automatic = true;
-    # nix.settings.auto-optimise-store = true;
+    # nix.optimise.automatic = true;
+    nix.settings.auto-optimise-store = true;
 }
