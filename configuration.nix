@@ -153,8 +153,8 @@ in
         discord
         vscodium
         libreoffice
-        hunspell
-        hunspellDicts.fr-any
+        aspell
+        aspellDicts.fr
     ];
 
     # for protonup
@@ -163,13 +163,16 @@ in
     };
 
     # Garbage Collection
-    # nix.gc = {
-    #     automatic = true;
-    #     dates = "weekly";
-    #     options = "--delete-older-than 7d";
-    # };
+    nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+    };
+
+    # Auto system update
+    system.autoUpgrade.enable = true;
 
     # Optimise Store
-    # nix.optimise.automatic = true;
-    nix.settings.auto-optimise-store = true;
+    nix.optimise.automatic = true;
+    # nix.settings.auto-optimise-store = true;
 }

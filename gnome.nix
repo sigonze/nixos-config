@@ -37,8 +37,15 @@
         gnomeExtensions.dash-to-dock
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
+        gnomeExtensions.gsconnect
         gnome.gnome-tweaks
         papirus-icon-theme
         adw-gtk3
     ];
+
+    # gsconnect
+    programs.kdeconnect = {
+        enable = true;
+        package = pkgs.gnomeExtensions.gsconnect;
+    };
 }
