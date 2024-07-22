@@ -8,6 +8,7 @@ in
     imports = [
         ./hardware-configuration.nix
         ./gnome.nix
+        # ./xfce.nix
     ];
 
     # Select Kernel
@@ -59,9 +60,12 @@ in
         extraGroups = [ "networkmanager" "wheel" "games" "scanner" "lp" ];
     };
 
-    programs.bash.promptInit = ''
-        PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\n\$ '
-    '';
+    programs.bash = {
+        promptInit = "PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\n\$ '";
+        shellAliases = {
+            nix-diff = "nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)";
+        };
+    };
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
@@ -101,14 +105,19 @@ in
         pulse.enable = true;
     };
 
-
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
     # Programs
     programs.firefox.enable = true;
-    programs.steam.enable = true;
-    programs.steam.gamescopeSession.enable = true;
+    programs.steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+        extraCompatPackages = with pkgs; [
+            proton-ge-bin
+    ];
+}; 
+
     programs.gamemode.enable = true;
 
     # Packages
@@ -154,12 +163,4 @@ in
     # Optimise Store
     # nix.optimise.automatic = true;
     nix.settings.auto-optimise-store = true;
-
-    # NixOS version diff
-    system.activationScripts.report-changes = ''
-        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then 
-            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2) 
-        fi;
-    '';
 }
