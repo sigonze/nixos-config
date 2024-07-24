@@ -8,7 +8,6 @@ in
     imports = [
         ./hardware-configuration.nix
         ./gnome.nix
-        # ./xfce.nix
     ];
 
     # Select Kernel
@@ -25,7 +24,12 @@ in
     boot.loader.efi.canTouchEfiVariables = true;
 
     # Enable zram
-    zramSwap.enable = true;
+    zramSwap = {
+        enable = true;
+        priority = 100;
+    };
+    boot.kernel.sysctl = {  "vm.swappiness" = 10; };
+    
     # Enable fstrim
     services.fstrim.enable = true;
 
@@ -36,7 +40,7 @@ in
     # Set your time zone
     time.timeZone = "Europe/Paris";
 
-    # Select internationalisation properties.
+    # Select internationalisation properties
     i18n.defaultLocale = "fr_FR.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -66,42 +70,36 @@ in
     };
 
     # Enable the X11 windowing system
-    services.xserver.enable = true;
-
-    # Remove xterm
-    services.xserver.excludePackages = [ pkgs.xterm ];
-
-    # Configure keymap in X11
-    services.xserver.xkb = {
-        layout = "fr";
-        variant = "oss";
+    services.xserver = {
+        enable = true;
+        # Configure keymap
+        xkb = {
+            layout = "fr";
+            variant = "oss";
+        };
+    
+        # Remove xterm
+        excludePackages = [ pkgs.xterm ];
     };
 
     # Configure console keymap
     console.keyMap = "fr";
 
-    # Enable CUPS to print documents
+    # Configure printer
     services.printing.enable = true;
-    # Enable sane and airscan for scanner
     hardware.sane = {
         enable = true;
         extraBackends = [ pkgs.sane-airscan ];
     };
 
-    # Enable sound with pipewire.
+    # Enable sound with pipewire
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        alsa.support32Bit = true;
+        # alsa.support32Bit = true;
         pulse.enable = true;
-        
-        extraConfig.pipewire."92-low-latency" = {
-            context.properties = {
-                default.clock.rate = 48000;
-            };
-        };
     };
 
     # Allow unfree packages
@@ -122,7 +120,6 @@ in
         game-devices-udev-rules     # gamepads
         linuxConsoleTools           # evdev-joystick for hid-fanatecff
     ];
-
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
