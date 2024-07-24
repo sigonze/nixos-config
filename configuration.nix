@@ -131,23 +131,15 @@ in
 
     # Packages
     environment.systemPackages = with pkgs; [
-        #busybox
         vim
         git
         gnumake
         gcc
-        #htop
         fastfetch
-        #wget
         nvd
 
         game-devices-udev-rules     # gamepads
         linuxConsoleTools           # evdev-joystick for hid-fanatecff
-        glxinfo
-        vulkan-tools
-        pciutils
-        inxi
-        # protonup
 
         bitwarden
         discord

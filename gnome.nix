@@ -37,7 +37,6 @@
         gnomeExtensions.dash-to-dock
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
-        gnomeExtensions.gsconnect
         gnome.gnome-tweaks
         papirus-icon-theme
         adw-gtk3
