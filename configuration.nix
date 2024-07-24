@@ -13,8 +13,6 @@ in
 
     # Select Kernel
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    #boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];
@@ -82,11 +80,6 @@ in
     # Configure console keymap
     console.keyMap = "fr";
 
-    # services.displayManager.autoLogin = {
-    #    enable = true;
-    #    user = "nicolas";
-    # };
-
     # Enable CUPS to print documents
     services.printing.enable = true;
     # Enable sane and airscan for scanner
@@ -143,28 +136,14 @@ in
 
         bitwarden
         discord
+        heroic
         vscodium
         libreoffice
         aspell
         aspellDicts.fr
     ];
 
-    # for protonup
-    # environment.sessionVariables = {
-    #     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    # };
-
-    # Garbage Collection
-    # nix.gc = {
-    #     automatic = true;
-    #     dates = "weekly";
-    #     options = "--delete-older-than 7d";
-    # };
-
-    # Auto system update
-    # system.autoUpgrade.enable = true;
 
     # Optimise Store
-    # nix.optimise.automatic = true;
     nix.settings.auto-optimise-store = true;
 }
