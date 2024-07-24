@@ -20,7 +20,7 @@ in
     boot.kernelModules = [ "hid-fanatec" ];
     users.groups.games = {};                    # needed by udev rules
 
-    # Bootloader.
+    # Bootloader
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -33,7 +33,7 @@ in
     networking.hostName = "nixos";
     networking.networkmanager.enable = true;
 
-    # Set your time zone.
+    # Set your time zone
     time.timeZone = "Europe/Paris";
 
     # Select internationalisation properties.
@@ -65,7 +65,7 @@ in
         };
     };
 
-    # Enable the X11 windowing system.
+    # Enable the X11 windowing system
     services.xserver.enable = true;
 
     # Remove xterm
@@ -100,9 +100,6 @@ in
         extraConfig.pipewire."92-low-latency" = {
             context.properties = {
                 default.clock.rate = 48000;
-                default.clock.quantum = 32;
-                default.clock.min-quantum = 32;
-                default.clock.max-quantum = 32;
             };
         };
     };
@@ -110,17 +107,8 @@ in
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
-    # Programs
-    programs.firefox.enable = true;
-    programs.steam = {
-        enable = true;
-        gamescopeSession.enable = true;
-        extraCompatPackages = with pkgs; [
-            proton-ge-bin
-        ];
-    }; 
-
-    programs.gamemode.enable = true;
+    # Activate Flatpak
+    services.flatpak.enable = true;
 
     # Packages
     environment.systemPackages = with pkgs; [
@@ -133,14 +121,6 @@ in
 
         game-devices-udev-rules     # gamepads
         linuxConsoleTools           # evdev-joystick for hid-fanatecff
-
-        bitwarden
-        discord
-        heroic
-        vscodium
-        libreoffice
-        aspell
-        aspellDicts.fr
     ];
 
 
