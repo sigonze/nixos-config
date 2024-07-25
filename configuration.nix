@@ -119,6 +119,8 @@ in
 
         game-devices-udev-rules     # gamepads
         linuxConsoleTools           # evdev-joystick for hid-fanatecff
+
+        vscodium
     ];
 
     # Optimise Store
