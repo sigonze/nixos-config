@@ -65,7 +65,7 @@ in
     programs.bash = {
         promptInit = "PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\n\$ '";
         shellAliases = {
-            nix-diff = "nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)";
+            nix-diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
         };
     };
 

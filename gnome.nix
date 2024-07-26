@@ -38,8 +38,9 @@
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
-        papirus-icon-theme
         adw-gtk3
+        papirus-icon-theme
+        bibata-cursors
     ];
 
     # gsconnect
