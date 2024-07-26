@@ -125,4 +125,7 @@ in
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
+
+    # Enable automatic upgrade
+    system.autoUpgrade.enable = true;
 }
