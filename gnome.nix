@@ -40,7 +40,6 @@
         gnome.gnome-tweaks
         adw-gtk3
         papirus-icon-theme
-        bibata-cursors
     ];
 
     # gsconnect

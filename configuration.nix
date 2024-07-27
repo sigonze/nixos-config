@@ -127,5 +127,12 @@ in
     nix.settings.auto-optimise-store = true;
 
     # Enable automatic upgrade
-    system.autoUpgrade.enable = true;
+    # system.autoUpgrade.enable = true;
+
+    # Enable Garbage Collector
+    # nix.gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 7d";
+    # };
 }
