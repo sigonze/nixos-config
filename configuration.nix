@@ -37,6 +37,9 @@ in
     networking.hostName = "nixos";
     networking.networkmanager.enable = true;
 
+    # Enable libvirtd for gnome-boxes
+    virtualisation.libvirtd.enable = true;
+
     # Set your time zone
     time.timeZone = "Europe/Paris";
 
@@ -59,7 +62,7 @@ in
     users.users.nicolas = {
         isNormalUser = true;
         description = "Nicolas";
-        extraGroups = [ "networkmanager" "wheel" "games" "scanner" "lp" ];
+        extraGroups = [ "networkmanager" "wheel" "games" "scanner" "lp" "libvirtd" ];
     };
 
     programs.bash = {
