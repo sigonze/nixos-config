@@ -12,6 +12,7 @@ in
 
     # Select Kernel
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];
@@ -67,7 +68,7 @@ in
         shellAliases = {
             nix-diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
             cat = "bat -P";
-            fastfetch="stat --format=\"Installation Date : %w\" / | cut -d\".\"  -f1; fastfetch;";
+            # fastfetch="stat --format=\"Installation Date : %w\" / | cut -d\".\"  -f1; fastfetch;";
         };
     };
 
