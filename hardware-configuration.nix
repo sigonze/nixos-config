@@ -10,8 +10,10 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" "amd_pstate=guided" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  # amd-pstate
+  boot.kernelParams = [ "amd_pstate=guided" ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
 
