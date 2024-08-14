@@ -67,7 +67,7 @@ in
         promptInit = "PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\] \\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\n\\$ '";
         shellAliases = {
             nix-diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-            cat = "bat -P";
+            bat = "bat -P";
             # fastfetch="stat --format=\"Installation Date : %w\" / | cut -d\".\"  -f1; fastfetch;";
         };
     };
@@ -132,6 +132,14 @@ in
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
+
+    # NixOS version diff
+    system.activationScripts.report-changes = ''
+        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then
+            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
+        fi;
+    '';
 
     # Enable automatic upgrade
     # system.autoUpgrade.enable = true;
