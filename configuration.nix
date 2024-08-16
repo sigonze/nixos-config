@@ -14,6 +14,9 @@ in
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
+    # Change default governor
+    powerManagement.cpuFreqGovernor = "schedutil";
+
     # Fanatec Wheel
     boot.extraModulePackages = [ fanatecff ];
     services.udev.packages = [ fanatecff ];
