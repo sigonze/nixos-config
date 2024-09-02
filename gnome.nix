@@ -39,12 +39,12 @@
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
         adw-gtk3
-        papirus-icon-theme
+        # papirus-icon-theme
     ];
 
     # gsconnect
-    programs.kdeconnect = {
-        enable = true;
-        package = pkgs.gnomeExtensions.gsconnect;
-    };
+    # programs.kdeconnect = {
+    #     enable = true;
+    #     package = pkgs.gnomeExtensions.gsconnect;
+    # };
 }

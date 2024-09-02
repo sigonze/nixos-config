@@ -104,7 +104,7 @@ in
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        # alsa.support32Bit = true;
+        alsa.support32Bit = true;
         pulse.enable = true;
     };
 
@@ -135,14 +135,6 @@ in
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
-
-    # NixOS version diff
-    system.activationScripts.report-changes = ''
-        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then
-            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
-        fi;
-    '';
 
     # Enable automatic upgrade
     # system.autoUpgrade.enable = true;

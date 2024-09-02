@@ -4,14 +4,14 @@ let moduledir = "lib/modules/${kernel.modDirVersion}/kernel/drivers/hid";
 in
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff";
-  version = "0.1.1";
+  version = "0.1.2";
   name = "hid-fanatecff-${version}-${kernel.modDirVersion}";
 
   src = fetchFromGitHub {
     owner = "gotzl";
     repo = "hid-fanatecff";
     rev = version;
-    sha256 = "11dbhxxg2w1as7jp6dxf5n3xqgawz5xbd09a8z30d89yfk53qzic";
+    sha256 = "00bqf0vpviiz0m9wqb7bmr1awxyal4npjyvc5xy0vz19gn6xn05p";
   };
 
   hardeningDisable = [ "pic" "format" ];
