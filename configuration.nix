@@ -6,7 +6,7 @@
     imports = [
         ./hardware-configuration.nix
         ./drivers/fanatec.nix
-        ./gnome.nix
+        ./desktop/gnome.nix
     ];
 
     # Select Kernel
