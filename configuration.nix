@@ -1,12 +1,11 @@
 { config, pkgs, lib, ... }:
 
-let fanatecff = config.boot.kernelPackages.callPackage ./hid-fanatecff.nix {};
-in
 {
     system.stateVersion = "24.05";
 
     imports = [
         ./hardware-configuration.nix
+        ./drivers/fanatec.nix
         ./gnome.nix
     ];
 
@@ -16,12 +15,6 @@ in
 
     # Change default governor
     powerManagement.cpuFreqGovernor = "schedutil";
-
-    # Fanatec Wheel
-    boot.extraModulePackages = [ fanatecff ];
-    services.udev.packages = [ fanatecff ];
-    boot.kernelModules = [ "hid-fanatec" ];
-    users.groups.games = {};                    # needed by udev rules
 
     # Bootloader
     boot.loader.systemd-boot.enable = true;
@@ -128,7 +121,6 @@ in
         glxinfo
 
         game-devices-udev-rules     # gamepads
-        linuxConsoleTools           # evdev-joystick for hid-fanatecff
 
         vscodium
     ];
