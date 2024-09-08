@@ -12,9 +12,6 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  
-  # amd-pstate
-  boot.kernelParams = [ "amd_pstate=guided" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/da31325d-bb24-4412-a2c7-b8e45a77db03";

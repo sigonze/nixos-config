@@ -16,6 +16,9 @@
     # Change default governor
     powerManagement.cpuFreqGovernor = "schedutil";
 
+    # amd-pstate
+    boot.kernelParams = [ "amd_pstate=guided" ];
+
     # Bootloader
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -100,6 +103,9 @@
         alsa.support32Bit = true;
         pulse.enable = true;
     };
+
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;

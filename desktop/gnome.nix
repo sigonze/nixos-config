@@ -6,7 +6,7 @@
     services.xserver.desktopManager.gnome.enable = true;
 
     # fix question mark icon in gnome
-    networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
+    # networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
 
     # Debloat Gnome
     environment.gnome.excludePackages = (with pkgs; [
@@ -39,7 +39,7 @@
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
         adw-gtk3
-        # papirus-icon-theme
+        papirus-icon-theme
     ];
 
     # gsconnect
