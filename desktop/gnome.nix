@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-    # Enable the GNOME Desktop Environment.
+    # Enable the GNOME Desktop Environment
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
 
-    # fix question mark icon in gnome
-    # networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
+    # fix wifi question mark icon in gnome
+    networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
 
     # Debloat Gnome
     environment.gnome.excludePackages = (with pkgs; [
@@ -43,8 +43,8 @@
     ];
 
     # gsconnect
-    # programs.kdeconnect = {
-    #     enable = true;
-    #     package = pkgs.gnomeExtensions.gsconnect;
-    # };
+    programs.kdeconnect = {
+        enable = true;
+        package = pkgs.gnomeExtensions.gsconnect;
+    };
 }
