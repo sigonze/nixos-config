@@ -15,6 +15,9 @@
     # Hostname
     networking.hostName = "nix-gaming";
 
+    # Configure keyboard variant
+    services.xserver.xkb.variant = "oss";
+
     # Select Kernel
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -28,9 +31,6 @@
     # Configure zram
     zramSwap.priority = 100;
     boot.kernel.sysctl = {  "vm.swappiness" = 10; };
-
-    # Configure keyboard variant
-    services.xserver.xkb.variant = "oss";
 
     # Update user group for sysfs fanatec wheel
     users.users.nicolas.extraGroups =  [ "games" ];
