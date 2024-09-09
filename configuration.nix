@@ -3,11 +3,14 @@
 {
     imports = [
         ./hardware-configuration.nix
-        ./conf/common.nix
         ./drivers/fanatec.nix
+        ./conf/common.nix
         ./desktop/gnome.nix
         ./apps/base.nix
         ./apps/coding.nix
+        # replaced by flatpak apps
+        # ./apps/essentials.nix
+        # ./apps/gaming.nix
     ];
 
     # Hostname

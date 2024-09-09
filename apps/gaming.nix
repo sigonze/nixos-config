@@ -15,5 +15,7 @@
     environment.systemPackages = with pkgs; [
         game-devices-udev-rules     # gamepads
         heroic
+        protonplus
+        ludusavi
     ];
 }
