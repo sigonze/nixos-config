@@ -3,8 +3,8 @@
 {
     imports = [
         ./hardware-configuration.nix
+        ./base-configuration.nix
         ./drivers/fanatec.nix
-        ./conf/common.nix
         ./desktop/gnome.nix
         ./apps/coding.nix
         # replaced by flatpak apps
