@@ -6,7 +6,6 @@
         ./drivers/fanatec.nix
         ./conf/common.nix
         ./desktop/gnome.nix
-        ./apps/base.nix
         ./apps/coding.nix
         # replaced by flatpak apps
         # ./apps/essentials.nix
@@ -33,8 +32,8 @@
     # Configure keyboard variant
     services.xserver.xkb.variant = "oss";
 
-    # Activate Flatpak
-    services.flatpak.enable = true;
+    # Update user group for sysfs fanatec wheel
+    users.users.nicolas.extraGroups =  [ "games" ];
 
     # Packages
     environment.systemPackages = with pkgs; [

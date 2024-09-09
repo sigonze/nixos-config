@@ -39,13 +39,8 @@
         extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     };
 
-    programs.bash = {
-        promptInit = "PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\] \\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\n\\$ '";
-        shellAliases = {
-            nix-diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-            bat = "bat -P";
-        };
-    };
+    # Change bash default prompt
+    programs.bash.promptInit = "PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\] \\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\n\\$ '";
 
     # Enable the X11 windowing system
     services.xserver.enable = true;
@@ -76,6 +71,28 @@
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
+
+    # Activate Flatpak
+    services.flatpak.enable = true;
+
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
+
+    # Add aliases
+    programs.bash.shellAliases = {
+        nix-diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
+        bat = "bat -P";
+    };
+
+    # Base apps
+    environment.systemPackages = with pkgs; [
+        bat
+        nvd
+        inxi
+        pciutils
+        glxinfo
+        fastfetch
+    ];
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;

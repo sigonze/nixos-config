@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    # Enable XFCE Desktop Environment.
+    # Enable XFCE Desktop Environment
     services.xserver.desktopManager.xfce.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
     services.displayManager.defaultSession = "xfce";
