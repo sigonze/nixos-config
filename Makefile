@@ -1,3 +1,5 @@
+include options.mk
+
 all: test clean
 
 check-host:
