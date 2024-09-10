@@ -6,19 +6,12 @@ Store my NixOS configuration file
 
 Test configurations
 
-All hosts
 ```
-make
-```
-
-Specific host
-
-```
-make test_gaming
+make test HOST=gaming
 ```
 or
 ```
-make test_macbook
+make test HOST=macbook
 ```
 
 Cleanup generation
@@ -30,12 +23,12 @@ make clean
 Configuration deployment is depending on host
 
 ```
-sudo make gaming
+sudo make install HOST=gaming
 ```
 or
 
 ```
-sudo make macbook
+sudo make install HOST=macbook
 ```
 
 
