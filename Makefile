@@ -21,11 +21,11 @@ check-hwconf:
 
 test: check-host
 	mkdir -p test
-	rsync -avz ./ hosts/$(HOST)/ test/ --exclude=test --exclude=hosts --exclude=.git --delete-after
+	rsync -arvz --exclude=test --exclude=hosts --exclude=.git ./ hosts/$(HOST)/ test/ --delete-after
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 install: check-host check-hwconf
-	rsync -av ./ hosts/$(HOST)/ /etc/nixos/ --exclude=test --exclude=hosts --exclude=.git --delete-after
+	rsync -arvz --exclude=test --exclude=hosts --exclude=.git ./ hosts/$(HOST)/ /etc/nixos/ --delete-after
 	nixos-rebuild boot
 
 clean:
