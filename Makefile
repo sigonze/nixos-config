@@ -1,32 +1,25 @@
 all: test_gaming test_macbook
 
 test_gaming:
-	[ -d test ] && rm -rf test || true
 	mkdir -p test
-	rsync -av ./ test/ --exclude=test --exclude=hosts --exclude=.git
-	rsync -av hosts/gaming/ test/
+	rsync -avz ./ hosts/gaming/ test/ --exclude=test --exclude=hosts --exclude=.git --delete-after
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 test_macbook:
-	[ -d test ] && rm -rf test || true
 	mkdir -p test
-	rsync -av ./ test/ --exclude=test --exclude=hosts --exclude=.git
-	rsync -av hosts/macbook/ test/
+	rsync -avz ./ hosts/macbook/ test/ --exclude=test --exclude=hosts --exclude=.git --delete-after
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 clean:
 	nix-collect-garbage -d
 
 gaming:
-	rsync -av ./ /etc/nixos --exclude=test --exclude=hosts --exclude=.git
-	rsync -av hosts/gaming/ /etc/nixos
+	rsync -av ./ hosts/gaming/ /etc/nixos/ --exclude=test --exclude=hosts --exclude=.git --delete-after
 	nixos-rebuild boot
 
 macbook:
-	rsync -av ./ /etc/nixos --exclude=test --exclude=hosts --exclude=.git
-	rsync -av hosts/macbook/ /etc/nixos
+	rsync -av ./ hosts/macbook/ /etc/nixos/ --exclude=test --exclude=hosts --exclude=.git --delete-after
 	nixos-rebuild boot
-
 
 mr_proper:
 	nix-collect-garbage -d
