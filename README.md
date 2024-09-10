@@ -4,27 +4,49 @@ Store my NixOS configuration file
 
 ## How to use
 
-Configuration testing
+Test configurations
+
+All hosts
 ```
 make
 ```
 
+Specific host
+
+```
+make test_gaming
+```
+or
+```
+make test_macbook
+```
+
 Cleanup generation
+
 ```
 make clean
 ```
 
-Configuration deployment
+Configuration deployment is depending on host
+
 ```
-sudo make install
+sudo make gaming
+```
+or
+
+```
+sudo make macbook
 ```
 
+
 Update packages
+
 ```
 sudo make update
 ```
 
 Cleanup old generations
+
 ```
 sudo make mr_proper
 ```
