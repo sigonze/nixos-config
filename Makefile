@@ -1,4 +1,8 @@
-include config.mk
+ifeq ("$(wildcard config.mk)","")
+    $(warning Configuration file config.mk does not exist)
+else
+	include config.mk
+endif
 
 all: test clean
 
