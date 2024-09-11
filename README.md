@@ -5,6 +5,7 @@ NixOS configuration (for my Gaming PC and my old Macbook Pro 11)
 
 ## How to use
 
+### Configure your HOST (should be done only once)
 Create a configuration file `config.mk` to specify your current host and put the files related to your host in the folder `hosts/<hostname>`.
 Note: this file is optionnal if you specify the HOST for each command (for instance `HOST=gaming`)
 Its content should be something like this:
@@ -25,20 +26,31 @@ For my Macbook Pro:
 cp config.macbook.mk config.mk
 ```
 
-To test the configuration, the command `make` will perform a dry-run and cleanup the generated content after.
+### Test the NixOS configuration
+Just call the command:
+```make```
+It will perform a dry-run without modifying your configuration and cleanup the generated content after.
 
-To install and rebuild nixos (better to test first), the command `make install` can be used.
+### Install the NixOS configuration
+The command to call is:
+```
+sudo make install
+```
+It will install (the previous configuration will be replaced) and rebuild NixOS (reminder: better to test first).
+
+Then you can use NixOS as usual.
 
 
+## Additionnal Commands
 
-## Other Commands
-
-### Update nixos
+### Update NixOS
+This command is not mandatory, only more convenient to me.
 ```
 sudo make update
 ```
 
 ### Cleanup old generations
+Same here. This command is not mandatory, only more convenient to me.
 ```
 sudo make mr_proper
 ```
@@ -63,7 +75,7 @@ make test HOST=macbook
 make clean
 ```
 
-### Install and rebuild nixos for another HOST than the one specified in `config.mk` file.
+### Install and rebuild NixOS for another HOST than the one specified in `config.mk` file.
 Careful here your may break your installation. But since the update is applied after the restart, you norammly only have to choose the previous configuration to restart and to fix.
 ```
 sudo make install HOST=gaming
