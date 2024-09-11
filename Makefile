@@ -39,6 +39,10 @@ check-hwconf:
 		fi; \
 	fi;
 
+# check admin rights
+check-admin:
+	@[ "$$EUID" -eq 0 ] || (echo "This command needs admin rights" && exit 1);
+
 # test the configuration
 test: check-host
 	mkdir -p test
@@ -46,7 +50,7 @@ test: check-host
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 # update the configuration & rebuild nixos
-install: check-host check-hwconf
+install: check-admin check-host check-hwconf
 	$(call cfg_copy,/etc/nixos)
 	nixos-rebuild boot
 
@@ -56,13 +60,13 @@ clean:
 	@if [ -d "test" ]; then rm -r test; fi
 
 # delete old generations
-mr_proper:
+mr_proper: check-admin
 	nix-collect-garbage -d
 	nixos-rebuild boot
 
 # update nixos
-update:
+update: check-admin
 	nix-channel --update
 	nixos-rebuild boot
 
-.PHONY: all test clean check-host check-hwconf
+.PHONY: all test clean check-admin check-host check-hwconf
