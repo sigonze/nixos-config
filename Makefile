@@ -1,4 +1,4 @@
-include options.mk
+include config.mk
 
 all: test clean
 
