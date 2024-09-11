@@ -33,18 +33,17 @@ To install and rebuild nixos (better to test first), the command `make install` 
 
 ## Other Commands
 
-Update nixos
+### Update nixos
 ```
 sudo make update
 ```
 
-Cleanup old generations
+### Cleanup old generations
 ```
 sudo make mr_proper
 ```
 
-Perform a dry-run (only)
-
+### Perform a dry-run (only)
 With the HOST specified in `config.mk` file
 ```
 make test
@@ -59,12 +58,13 @@ or
 make test HOST=macbook
 ```
 
-Do a clean after a test command
+### Perform a local clean (typically after test command)
 ```
 make clean
 ```
 
-Install and rebuild noxis for another HOST than the one specified in `config.mk` file.
+### Install and rebuild nixos for another HOST than the one specified in `config.mk` file.
+Careful here your may break your installation. But since the update is applied after the restart, you norammly only have to choose the previous configuration to restart and to fix.
 ```
 sudo make install HOST=gaming
 ```
