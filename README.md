@@ -28,7 +28,9 @@ cp config.macbook.mk config.mk
 
 ### Test the NixOS configuration
 Just call the command:
-```make```
+```
+make
+```
 It will perform a dry-run without modifying your configuration and cleanup the generated content after.
 
 ### Install the NixOS configuration
