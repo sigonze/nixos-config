@@ -1,14 +1,14 @@
 # check if config.mk exists before including it
 ifeq ("$(wildcard config.mk)","")
-    $(warning Configuration file config.mk does not exist)
+	$(warning Configuration file config.mk does not exist)
 else
 	include config.mk
 endif
 
-# define macro to copy current configuration (only nix files) is the specified directory
+# define macro to copy current configuration (only nix files) in the given directory
 define cfg_copy
 	@if [ -d "$(1)" ]; then \
-		rsync -arvz --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1) --delete-after; \
+		rsync -arvz --delete-after --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
 	else \
 		echo "Directory $(1) not found"; \
 		exit 1; \
@@ -25,7 +25,7 @@ ifndef HOST
 endif
 	@test -d "hosts/$(HOST)" || (echo "Directory hosts/$(HOST) does not exist" && exit 1)
 
-# check if hardware-configuration has change (99% of the cases => should not)
+# check if hardware-configuration has changed (should not in 99% of the cases)
 check-hwconf:
 	@diff hosts/$(HOST)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
 	if [ $$? -ne 0 ]; then \
@@ -39,22 +39,28 @@ check-hwconf:
 		fi; \
 	fi;
 
+# test the configuration
 test: check-host
 	mkdir -p test
 	$(call cfg_copy,test)
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
+# update the configuration & rebuild nixos
 install: check-host check-hwconf
 	$(call cfg_copy,/etc/nixos)
 	nixos-rebuild boot
 
+# clean local build
 clean:
 	nix-collect-garbage -d
+	@if [ -d "test" ]; then rm -r test; fi
 
+# delete old generations
 mr_proper:
 	nix-collect-garbage -d
 	nixos-rebuild boot
 
+# update nixos
 update:
 	nix-channel --update
 	nixos-rebuild boot
