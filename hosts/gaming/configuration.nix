@@ -32,8 +32,11 @@
     zramSwap.priority = 100;
     boot.kernel.sysctl = {  "vm.swappiness" = 10; };
 
-    # Update user group for sysfs fanatec wheel
-    users.users.nicolas.extraGroups =  [ "games" ];
+    # Enable Gamemode
+    programs.gamemode.enable = true;
+
+    # Update user group for fanatec wheel && gamemode
+    users.users.nicolas.extraGroups =  [ "games" "gamemode" ];
 
     # Packages
     environment.systemPackages = with pkgs; [
