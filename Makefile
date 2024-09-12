@@ -16,6 +16,7 @@ define cfg_copy
 	fi
 endef
 
+
 # define a macro to perform nix diff
 CURR_GEN=$(shell ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
 
