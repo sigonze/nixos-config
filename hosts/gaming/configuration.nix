@@ -6,7 +6,7 @@
         ./base-configuration.nix
         ./drivers/fanatec.nix
         ./desktop/gnome.nix
-        ./apps/coding.nix
+        # ./apps/coding.nix
         # replaced by flatpak apps
         # ./apps/essentials.nix
         # ./apps/gaming.nix
