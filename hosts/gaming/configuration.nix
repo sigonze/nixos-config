@@ -22,7 +22,7 @@
     powerManagement.cpuFreqGovernor = "schedutil";
 
     # amd-pstate
-    boot.kernelParams = [ "amd_pstate=guided" ];
+    boot.kernelParams = [ "amd_pstate=active" ];
 
     # Configure zram
     zramSwap.priority = 100;
