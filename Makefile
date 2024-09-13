@@ -23,21 +23,22 @@ define cfg_copy
 	@if [ -d "$(1)" ]; then \
 		rsync -ar --out-format="%n" --delete-after --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
 	else \
-		echo -e "$(_YELLOW_)Directory $(1) not found$(_NC_)"; \
+		echo -e "$(_RED_)error:$(_NC_) directory $(1) not found"; \
 		exit 1; \
 	fi
 endef
 
 
 # Macro to perform nix diff
-CURR_GEN:=$(shell ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
+CURR_GEN := $(shell ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
 
 define nix_diff
 	@NEXT_GEN=$$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1); \
 	if [ "$$NEXT_GEN" != "$(CURR_GEN)" ]; then \
 		nvd diff "$(CURR_GEN)" "$$NEXT_GEN"; \
+		echo -e "$(_BOLD_)you can restart to switch$(_NC_)"; \
 	else \
-		echo -e "$(_YELLOW_)No new package installed$(_NC_)"; \
+		echo -e "$(_BOLD_)no new generation$(_NC_)"; \
 	fi
 endef
 
@@ -49,18 +50,18 @@ all: test clean
 # check if HOST has be provided
 check-host:
 ifndef HOST
-	@echo -e "$(_YELLOW_)HOST not defined$(_NC_)"; \
+	@echo -e "$(_RED_)error:$(_NC_) HOST variable not provided"; \
 	exit 1
 endif
-	@test -d "hosts/$(HOST)" || (echo "Directory hosts/$(HOST) does not exist" && exit 1)
+	@test -d "hosts/$(HOST)" || (echo -e "$(_RED_)error:$(_NC_) directory hosts/$(HOST) does not exist" && exit 1)
 
 
 # check if hardware-configuration has changed (should not in 99% of the cases)
 check-hwconf:
 	@diff hosts/$(HOST)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
 	if [ $$? -ne 0 ]; then \
-		echo -e "$(_YELLOW_)WARNING! File hardware-configuration.nix has changed!"; \
-		echo -e "It may BREAK your system if you do not know what you are doing.$(_NC_)"; \
+		echo -e "$(_YELLOW_)warning:$(_NC_) hardware-configuration.nix has changed!"; \
+		echo -e "It may BREAK your system if you do not know what you are doing."; \
 		echo -e "$(_BOLD_)Do you want to continue (y/N)?$(_NC_)"; \
 		read answer; \
 		if [ "$$answer" != "y" ]; then \
@@ -72,7 +73,7 @@ check-hwconf:
 
 # Check admin rights
 check-admin:
-	@[ "$$EUID" -eq 0 ] || (echo -e "$(_YELLOW_)This command needs admin rights$(_NC_)" && exit 1);
+	@[ "$$EUID" -eq 0 ] || (echo -e "$(_RED_)error:$(_NC_) this command needs admin rights" && exit 1);
 
 
 # Test the configuration locally

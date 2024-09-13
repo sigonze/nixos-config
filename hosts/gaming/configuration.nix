@@ -19,7 +19,7 @@
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Change default governor
-    powerManagement.cpuFreqGovernor = "schedutil";
+    # powerManagement.cpuFreqGovernor = "schedutil";
 
     # amd-pstate
     boot.kernelParams = [ "amd_pstate=active" ];
