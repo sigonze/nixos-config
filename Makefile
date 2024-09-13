@@ -1,31 +1,43 @@
-# check if config.mk exists before including it
-ifeq ("$(wildcard config.mk)","")
-	$(warning Configuration file config.mk does not exist)
+# Colors
+_NC_     := \033[0m
+_BOLD_   := \033[1m
+_RED_    := \033[0;31m
+_GREEN_  := \033[0;32m
+_YELLOW_ := \033[0;33m
+_BLUE_   := \033[0;34m
+_PURPLE_ := \033[0;36m
+_CYAN_   := \033[0;36m
+_WHITE_  := \033[0;37m
+
+
+# Check if config.mk exists before including it
+ifneq ("$(wildcard config.mk)","")
+include config.mk
 else
-	include config.mk
+$(warning Configuration file config.mk does not exist)
 endif
 
 
-# define macro to copy current configuration (only nix files) in the given directory
+# Macro to copy current configuration (only nix files) in the given directory
 define cfg_copy
 	@if [ -d "$(1)" ]; then \
-		rsync -arvz --delete-after --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
+		rsync -ar --out-format="%n" --delete-after --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
 	else \
-		echo "Directory $(1) not found"; \
+		echo -e "$(_YELLOW_)Directory $(1) not found$(_NC_)"; \
 		exit 1; \
 	fi
 endef
 
 
-# define a macro to perform nix diff
-CURR_GEN=$(shell ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
+# Macro to perform nix diff
+CURR_GEN:=$(shell ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
 
 define nix_diff
-	NEXT_GEN=$$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1); \
+	@NEXT_GEN=$$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1); \
 	if [ "$$NEXT_GEN" != "$(CURR_GEN)" ]; then \
 		nvd diff "$(CURR_GEN)" "$$NEXT_GEN"; \
 	else \
-		echo "No new package installed"; \
+		echo -e "$(_YELLOW_)No new package installed$(_NC_)"; \
 	fi
 endef
 
@@ -37,7 +49,8 @@ all: test clean
 # check if HOST has be provided
 check-host:
 ifndef HOST
-	$(error HOST not defined)
+	@echo -e "$(_YELLOW_)HOST not defined$(_NC_)"; \
+	exit 1
 endif
 	@test -d "hosts/$(HOST)" || (echo "Directory hosts/$(HOST) does not exist" && exit 1)
 
@@ -46,49 +59,49 @@ endif
 check-hwconf:
 	@diff hosts/$(HOST)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
 	if [ $$? -ne 0 ]; then \
-		echo -e "\033[31mWARNING!\033[0m File hardware-configuration.nix has changed!"; \
-		echo "It may BREAK your system if you do not know what you are doing."; \
-		echo "Do you want to continue (y/n)?"; \
+		echo -e "$(_YELLOW_)WARNING! File hardware-configuration.nix has changed!"; \
+		echo -e "It may BREAK your system if you do not know what you are doing.$(_NC_)"; \
+		echo -e "$(_BOLD_)Do you want to continue (y/N)?$(_NC_)"; \
 		read answer; \
 		if [ "$$answer" != "y" ]; then \
-			echo "Aborting."; \
+			echo "Abort"; \
 			exit 1; \
 		fi; \
 	fi;
 
 
-# check admin rights
+# Check admin rights
 check-admin:
-	@[ "$$EUID" -eq 0 ] || (echo "This command needs admin rights" && exit 1);
+	@[ "$$EUID" -eq 0 ] || (echo -e "$(_YELLOW_)This command needs admin rights$(_NC_)" && exit 1);
 
 
-# test the configuration
+# Test the configuration locally
 test: check-host
-	mkdir -p test
+	@mkdir -p test
 	$(call cfg_copy,test)
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 
-# update the configuration & rebuild nixos
+# Update the configuration & rebuild NixOS
 install: check-admin check-host check-hwconf
 	$(call cfg_copy,/etc/nixos)
 	nixos-rebuild boot
 	$(call nix_diff)
 
 
-# clean local build
+# Clean local build
 clean:
 	nix-collect-garbage -d
 	@if [ -d "test" ]; then rm -r test; fi
 
 
-# delete old generations
+# Delete old generations
 mr_proper: check-admin
 	nix-collect-garbage -d
 	nixos-rebuild boot
 
 
-# update nixos
+# Update NixOS
 update: check-admin
 	nix-channel --update
 	nixos-rebuild boot
