@@ -88,6 +88,7 @@
 
     environment.systemPackages = with pkgs; [
         vim
+        python3
         gnumake
         nvd
         fastfetch
