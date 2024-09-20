@@ -15,7 +15,8 @@
     services.xserver.xkb.variant = "oss";
 
     # Select Kernel
-    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Change default governor
@@ -31,12 +32,15 @@
     # Enable Gamemode
     programs.gamemode.enable = true;
 
+    # Steam rules
+    hardware.steam-hardware.enable = true;
+
     # Update user group for fanatec wheel && gamemode
     users.users.nicolas.extraGroups =  [ "games" "gamemode" ];
 
     # Packages
     environment.systemPackages = with pkgs; [
-        game-devices-udev-rules     # gamepads
+        # game-devices-udev-rules     # gamepads
     ];
 
     # Initial installation version (should not be modified)

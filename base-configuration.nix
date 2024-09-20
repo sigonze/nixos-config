@@ -88,9 +88,8 @@
 
     environment.systemPackages = with pkgs; [
         vim
-        python3
-        python3Packages.pip
         gnumake
+        python3
         nvd
         fastfetch
         vscodium
