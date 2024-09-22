@@ -15,9 +15,16 @@
     services.xserver.xkb.variant = "oss";
 
     # Select Kernel
-    boot.kernelPackages = pkgs.linuxPackages_xanmod;
-    # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
     # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    # Enable opengl drivers
+    hardware.opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+    };
 
     # Change default governor
     # powerManagement.cpuFreqGovernor = "schedutil";
@@ -32,8 +39,14 @@
     # Enable Gamemode
     programs.gamemode.enable = true;
 
-    # Steam rules
+    # Steam device
     hardware.steam-hardware.enable = true;
+
+    # Rules to disable Dualshock touchpad
+    services.udev.extraRules = ''
+        ACTION=="add|change", ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+        ACTION=="add|change", ATTRS{name}=="Sony Interactive Entertainment DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    '';
 
     # Update user group for fanatec wheel && gamemode
     users.users.nicolas.extraGroups =  [ "games" "gamemode" ];
