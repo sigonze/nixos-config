@@ -15,7 +15,7 @@
         snapshot
         gnome.gnome-shell-extensions
     ]) ++ (with pkgs.gnome; [
-        baobab          # disk usage analyzer
+        # baobab          # disk usage analyzer
         epiphany        # web browser
         totem           # video player
         yelp            # help viewer
