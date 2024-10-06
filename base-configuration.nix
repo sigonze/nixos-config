@@ -56,7 +56,7 @@
     services.printing = {
         enable = true;
         # drivers = [ pkgs.hplip ];
-        # startWhenNeeded = true;
+        startWhenNeeded = true;
     };
 
     services.avahi = {
