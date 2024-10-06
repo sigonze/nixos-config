@@ -7,7 +7,7 @@
 
     # Enable zram
     zramSwap.enable = true;
-    
+
     # Enable fstrim
     services.fstrim.enable = true;
 
@@ -53,7 +53,20 @@
     console.keyMap = "fr";
 
     # Configure printer
-    services.printing.enable = true;
+    services.printing = {
+        enable = true;
+        # drivers = [ pkgs.hplip ];
+        # startWhenNeeded = true;
+    };
+
+    services.avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+    };
+
+
+    # systemd.services.cups-browsed.enable = false;
     hardware.sane = {
         enable = true;
         extraBackends = [ pkgs.sane-airscan ];

@@ -11,6 +11,8 @@
     # Hostname
     networking.hostName = "nix-mac";
 
+    # hardware.facetimehd.enable = true;
+
     # Configure keyboard variant
     services.xserver.xkb.variant = "mac";
 
