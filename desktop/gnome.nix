@@ -19,7 +19,7 @@
         epiphany        # web browser
         totem           # video player
         yelp            # help viewer
-        #evince          # document viewer
+        # evince          # document viewer
         geary           # email client
         gnome-calendar 
         gnome-characters
@@ -37,9 +37,9 @@
         gnomeExtensions.dash-to-dock
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
+        # gnomeExtensions.user-themes
         gnome.gnome-tweaks
         adw-gtk3
-        papirus-icon-theme
     ];
 
     # gsconnect
