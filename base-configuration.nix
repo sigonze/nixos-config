@@ -14,6 +14,9 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    # Enable firewall
+    networking.firewall.enable = true;
+
     # Set your time zone
     time.timeZone = "Europe/Paris";
 
@@ -59,12 +62,12 @@
         startWhenNeeded = true;
     };
 
+    # Enable autodiscovery
     services.avahi = {
         enable = true;
         nssmdns4 = true;
         openFirewall = true;
     };
-
 
     # systemd.services.cups-browsed.enable = false;
     hardware.sane = {
