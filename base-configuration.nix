@@ -11,7 +11,7 @@
     # Enable fstrim
     services.fstrim.enable = true;
 
-    # Eanble Firmware Service 
+    # Enable Firmware Service 
     services.fwupd.enable = true;
 
     # Enable networking
