@@ -34,27 +34,15 @@
                     ];
                 };
                 "org/gnome/shell/extensions/dash-to-dock" = {
-                    always-center-icons = true;
-                    apply-custom-theme = false;
-                    autohide-in-fullscreen = false;
                     background-color = "rgb(0,0,0)";
                     background-opacity = 0.8;
-                    click-action = "minimize-or-previews";
                     custom-background-color = true;
                     custom-theme-shrink = true;
-                    dash-max-icon-size = lib.gvariant.mkUint32 48;
                     disable-overview-on-startup = true;
-                    dock-fixed = false;
-                    dock-position = "BOTTOM";
-                    extend-height = false;
-                    height-fraction = 0.9;
-                    icon-size-fixed = false;
-                    intellihide-mode = "MAXIMIZED_WINDOWS";
                     running-indicator-style = "DOTS";
                     show-trash = false;
                     transparency-mode = "FIXED";
                 };
-
 
                 # Applications
                 "org/gnome/nautilus/icon-view" = {
@@ -68,10 +56,6 @@
                     spellcheck = false;
                     tab-width = lib.gvariant.mkUint32 4;
                     wrap-text = false;
-                };
-                "org/gnome/simple-scan" = {
-                    paper-height=lib.gvariant.mkUint32 2970;
-                    paper-width=lib.gvariant.mkUint32 2100;
                 };
             };
         }];
