@@ -12,7 +12,7 @@
                     icon-theme = "Adwaita";
                 };
                 "org/gnome/mutter" = {
-                    check-alive-timeout = lib.gvariant.mkInt32 30000;
+                    check-alive-timeout = lib.gvariant.mkUint32 30000;
                     dynamic-workspaces = true;
                     edge-tiling = true;
                     experimental-features = ["variable-refresh-rate"];
