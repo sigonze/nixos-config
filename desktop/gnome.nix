@@ -4,6 +4,7 @@
     imports = [
         ./dconf-gnome.nix
     ];
+
     # Enable the GNOME Desktop Environment
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
@@ -40,13 +41,10 @@
         gnomeExtensions.dash-to-dock
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
-        # gnomeExtensions.user-themes
         gnome.gnome-tweaks
-        # gnome.gnome-themes-extra
         adw-gtk3
     ];
 
-    # gsconnect
     programs.kdeconnect = {
         enable = true;
         package = pkgs.gnomeExtensions.gsconnect;

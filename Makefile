@@ -21,7 +21,7 @@ endif
 # Macro to copy current configuration (only nix files) in the given directory
 define cfg_copy
 	@if [ -d "$(1)" ]; then \
-		rsync -ar --out-format="%n" --delete-after --include='*.nix' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
+		rsync -ar --out-format="%n" --delete-after --include='*.nix' --include='*.json' --exclude='test/' --exclude='hosts/' --exclude='.git/' --include='*/' --exclude='*' ./ hosts/$(HOST)/ $(1); \
 	else \
 		echo -e "$(_RED_)error:$(_NC_) directory $(1) not found"; \
 		exit 1; \

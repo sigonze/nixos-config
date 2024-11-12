@@ -1,9 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+    imports = [
+        ./hardware-configuration.nix
+        ./host-configuration.nix
+        ./drivers/printers.nix
+        ./desktop/gnome.nix
+    ];
+
     # Bootloader
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader = {
+        timeout = 3;
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
 
     # Enable zram
     zramSwap.enable = true;
@@ -38,13 +48,6 @@
         LC_TIME = "fr_FR.UTF-8";
     };
 
-    # User
-    users.users.nicolas = {
-        isNormalUser = true;
-        description = "Nicolas";
-        extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
-    };
-
     # Change bash default prompt
     programs.bash.promptInit = "PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\] \\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\n\\$ '";
 
@@ -57,26 +60,6 @@
 
     # Configure console keymap
     console.keyMap = "fr";
-
-    # Configure printer
-    services.printing = {
-        enable = true;
-        # drivers = [ pkgs.hplip ];
-        startWhenNeeded = true;
-    };
-
-    # Enable autodiscovery
-    services.avahi = {
-        enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-    };
-
-    # systemd.services.cups-browsed.enable = false;
-    hardware.sane = {
-        enable = true;
-        extraBackends = [ pkgs.sane-airscan ];
-    };
 
     # Enable sound with pipewire
     hardware.pulseaudio.enable = false;
@@ -103,15 +86,10 @@
     };
 
     # Base apps
-    programs.git.enable = true;
-
     environment.systemPackages = with pkgs; [
         vim
-        gnumake
-        python3
         nvd
         fastfetch
-        vscodium
     ];
 
     # Optimise Store

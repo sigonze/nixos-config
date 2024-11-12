@@ -23,6 +23,9 @@
                 "org/gnome/desktop/wm/preferences" = {
                     button-layout = "appmenu:minimize,maximize,close";
                 };
+                "org/gnome/desktop/peripherals/keyboard" = {
+                    numlock-state = true;
+                };
 
                 # Extensions
                 "org/gnome/shell" = {
@@ -31,6 +34,16 @@
                         "gsconnect@andyholmes.github.io"
                         "appindicatorsupport@rgcjonas.gmail.com"
                         "dash-to-dock@micxgx.gmail.com"
+                    ];
+                    favorite-apps = [
+                        "org.gnome.Nautilus.desktop"
+                        "org.gnome.Console.desktop"
+                        "codium.desktop"
+                        "org.mozilla.firefox.desktop"
+                        "com.bitwarden.desktop.desktop"
+                        "com.discordapp.Discord.desktop"
+                        "com.valvesoftware.Steam.desktop"
+                        "com.heroicgameslauncher.hgl.desktop"
                     ];
                 };
                 "org/gnome/shell/extensions/dash-to-dock" = {
