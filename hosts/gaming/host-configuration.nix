@@ -23,8 +23,9 @@
     # Select Kernel
     # boot.kernelPackages = pkgs.linuxPackages_xanmod;
     # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    boot.kernelPackages = pkgs.linuxPackages_lqx;
+    # boot.kernelPackages = pkgs.linuxPackages_lqx;
     # boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     # amd-pstate
     boot.kernelParams = [ "amd_pstate=active" ];
