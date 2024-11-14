@@ -1,0 +1,17 @@
+{
+    "kernel": "xanmod_latest",
+    "users": [ "NixUser" ],
+    "sudoers": [ "NixUser" ],
+    "groups": [
+        "gaming"
+    ],
+    "drivers": [
+        "fanatec"
+    ],
+    "printers": [
+        "hplip"
+    ],
+    "gnome-extensions": [
+        "user-themes"
+    ]
+}

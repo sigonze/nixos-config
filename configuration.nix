@@ -1,12 +1,26 @@
 { config, pkgs, lib, ... }:
 
+let
+    extra-file = ./extra-config.json;
+    extra-config = if builtins.pathExists extra-file
+                   then builtins.fromJSON(builtins.readFile extra-file)
+                   else {};
+    extra-packages = map(pkg: pkgs."${pkg}") extra-config.packages or [];
+    extra-imports = map (grp: import ./groups/${grp}.nix) (extra-config.groups or []);
+in
 {
     imports = [
         ./hardware-configuration.nix
         ./host-configuration.nix
-        ./drivers/printers.nix
-        ./desktop/gnome.nix
-    ];
+        (import ./system/kernel.nix { inherit config pkgs lib extra-config; })
+        (import ./system/users.nix { inherit config pkgs lib extra-config; }) 
+        (import ./desktop/gnome.nix { inherit config pkgs lib extra-config; })
+        (import ./drivers/printers.nix { inherit config pkgs lib extra-config; })
+        (if builtins.elem "fanatec" (extra-config.drivers or []) then ./drivers/fanatec.nix else {})
+    ] ++ extra-imports;
+
+    # Hostname
+    networking.hostName = extra-config.hostname or "nix-os";
 
     # Bootloader
     boot.loader = {
@@ -90,7 +104,7 @@
         vim
         nvd
         fastfetch
-    ];
+    ] ++ extra-packages;
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;

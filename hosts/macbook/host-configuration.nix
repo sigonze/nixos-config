@@ -1,26 +1,6 @@
 { config, pkgs, ... }:
 
 {
-    imports = [
-        ./groups/devtools.nix
-    ];
-
-    # Hostname
-    networking.hostName = "nix-mac";
-
-    # Users
-    users.users.nicolas = {
-        isNormalUser = true;
-        description = "Nicolas";
-        extraGroups = [ "networkmanager" "wheel" ];
-    };
-
-    users.users.ruthanna = {
-        isNormalUser = true;
-        description = "Ruthanna";
-        extraGroups = [ "networkmanager" ];
-    };
-
     # hardware.facetimehd.enable = true;
 
     # Configure keyboard variant

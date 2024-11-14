@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs,  lib, extra-config, ... }:
+let
+    extra-gnome-extensions = map(pkg: pkgs.gnomeExtensions."${pkg}") extra-config.gnome-extensions or [];
+in
 {
     imports = [
         ./dconf-gnome.nix
@@ -43,7 +45,7 @@
         gnomeExtensions.caffeine
         gnome.gnome-tweaks
         adw-gtk3
-    ];
+    ] ++ extra-gnome-extensions;
 
     programs.kdeconnect = {
         enable = true;

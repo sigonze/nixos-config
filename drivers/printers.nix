@@ -1,11 +1,13 @@
-{ config, pkgs, lib,  ... }:
+{ config, pkgs, lib, extra-config, ... }:
 let
+    extra-printers = map(pkg: pkgs."${pkg}") extra-config.printers or [];
     users-list = builtins.attrNames config.users.users;
 in
 {
     # Configure printer
     services.printing = {
         enable = true;
+        drivers = extra-printers;
         startWhenNeeded = true;
     };
 

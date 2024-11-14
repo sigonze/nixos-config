@@ -1,0 +1,8 @@
+{
+    "hostname": "nix-mac",
+    "users": [ "Nicolas", "Ruthanna" ],
+    "sudoers": [ "Nicolas" ],
+    "groups": [
+        "devtools"
+    ]
+}
