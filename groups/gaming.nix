@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-    users-list = builtins.attrNames config.users.users;
+    all-users = builtins.attrNames config.users.users;
+    normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
 in
 {
     # Enable opengl drivers
@@ -29,6 +30,6 @@ in
 
     # add all users to group gamemode
     users.groups.gamemode = {
-        members = users-list;
+        members = normal-users;
     };
 }
