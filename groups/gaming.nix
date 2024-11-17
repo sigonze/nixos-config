@@ -9,14 +9,30 @@ in
     hardware.opengl = {
         enable = true;
         driSupport = true;
-        # driSupport32Bit = true;
+        driSupport32Bit = true;
     };
 
     # Enable Gamemode
     programs.gamemode.enable = true;
 
-    # Steam device
-    hardware.steam-hardware.enable = true;
+    # Steam
+    #hardware.steam-hardware.enable = true;
+    programs.steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+        extraCompatPackages = with pkgs; [
+            proton-ge-bin
+        ];
+    };
+
+    # Gaming apps
+    environment.systemPackages = with pkgs; [
+        # protonplus
+        # protontricks
+        mangohud
+        goverlay
+        # heroic
+    ];
 
     # Rules to disable Dualshock touchpad
     services.udev.extraRules = ''
@@ -27,6 +43,11 @@ in
         ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
         ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
     '';
+
+    environment.sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+        MANGOHUD = 1;
+    };
 
     # add all users to group gamemode
     users.groups.gamemode = {

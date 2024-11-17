@@ -6,6 +6,7 @@
         ./host-configuration.nix
         ./drivers/printers.nix
         ./desktop/gnome.nix
+        # ./groups/essentials.nix
     ];
 
     # Bootloader
@@ -67,7 +68,7 @@
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        # alsa.support32Bit = true;
+        alsa.support32Bit = true;
         pulse.enable = true;
     };
 
