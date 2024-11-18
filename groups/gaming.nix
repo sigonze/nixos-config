@@ -6,11 +6,7 @@ let
 in
 {
     # Enable opengl drivers
-    hardware.opengl = {
-        enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-    };
+    hardware.graphics.enable = true;
 
     # Enable Gamemode
     programs.gamemode.enable = true;
@@ -46,7 +42,7 @@ in
 
     environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS="\${HOME}/.steam/root/compatibilitytools.d";
-        MANGOHUD=1;
+        # MANGOHUD=1;
         # MANGOHUD_CONFIG = "horizontal,table_columns=16,cpu_stats,gpu_stats,ram,vram,fps,frametime=0,frame_timing=1,hud_no_margin,cpu_power,gpu_power,time";
         MANGOHUD_CONFIG="horizontal,hud_no_margin,cpu_stats,ram,gpu_name,gpu_stats,vram,fps,frametime=0,frame_timing=0,time,time_format=%H\\:%M";
     };
