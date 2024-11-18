@@ -30,7 +30,7 @@ in
         # protonplus
         # protontricks
         mangohud
-        goverlay
+        vulkan-tools
         # heroic
     ];
 
@@ -45,10 +45,10 @@ in
     '';
 
     environment.sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-        MANGOHUD = 1;
-        # MANGOHUD_CONFIGFILE = "/etc/nixos/cfg/MangoHud.conf";
-        MANGOHUD_CONFIG = "horizontal,table_columns=16,cpu_stats,gpu_stats,ram,vram,fps,frametime=0,frame_timing=1,hud_no_margin,cpu_power,gpu_power,time";
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS="\${HOME}/.steam/root/compatibilitytools.d";
+        MANGOHUD=1;
+        # MANGOHUD_CONFIG = "horizontal,table_columns=16,cpu_stats,gpu_stats,ram,vram,fps,frametime=0,frame_timing=1,hud_no_margin,cpu_power,gpu_power,time";
+        MANGOHUD_CONFIG="horizontal,table_columns=16,cpu_stats,gpu_stats,ram,vram,fps,frametime=0,frame_timing=0,hud_no_margin,time,time_format=%X";
     };
 
     # add all users to group gamemode
