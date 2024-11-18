@@ -48,7 +48,7 @@ in
         STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
         MANGOHUD = 1;
         # MANGOHUD_CONFIGFILE = "/etc/nixos/cfg/MangoHud.conf";
-        MANGOHUD_CONFIG = "gpu_stats,cpu_stats,vram,ram,fps,frame_timing=1,time";
+        MANGOHUD_CONFIG = "horizontal,table_columns=16,cpu_stats,gpu_stats,ram,vram,fps,frametime=0,frame_timing=1,hud_no_margin,cpu_power,gpu_power,time";
     };
 
     # add all users to group gamemode
