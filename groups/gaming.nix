@@ -6,7 +6,10 @@ let
 in
 {
     # Enable opengl drivers
-    hardware.graphics.enable = true;
+    hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+    };
 
     # Enable Gamemode
     programs.gamemode.enable = true;
