@@ -18,7 +18,9 @@ in
     #hardware.steam-hardware.enable = true;
     programs.steam = {
         enable = true;
+        package = pkgs.steam.override { extraEnv = { MANGOHUD = 1; }; };
         gamescopeSession.enable = true;
+        remotePlay.openFirewall = true;
         extraCompatPackages = with pkgs; [
             proton-ge-bin
         ];
