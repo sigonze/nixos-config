@@ -13,7 +13,7 @@
     # networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
 
     # Debloat Gnome
-    environment.gnome.excludePackages = (with pkgs; [
+    environment.gnome.excludePackages = with pkgs; [
         gnome-tour
         gnome-connections
         snapshot
@@ -34,16 +34,19 @@
         gnome-music
         gnome-weather
         gnome-initial-setup
-    ]);
+    ];
 
-    environment.systemPackages = with pkgs; [
-        gnomeExtensions.dash-to-dock
-        gnomeExtensions.appindicator
-        gnomeExtensions.caffeine
+    environment.systemPackages = (with pkgs; [
         gnome-tweaks
         adw-gtk3
         papirus-icon-theme
-    ];
+        yaru-theme
+    ]) ++ (with pkgs.gnomeExtensions; [
+        dash-to-dock
+        appindicator
+        caffeine
+        user-themes
+    ]);
 
     programs.kdeconnect = {
         enable = true;

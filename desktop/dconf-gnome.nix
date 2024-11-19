@@ -8,8 +8,8 @@
                 "org/gnome/desktop/interface" = {
                     color-scheme = "prefer-dark";
                     enable-hot-corners = true;
-                    gtk-theme = "adw-gtk3-dark";
-                    icon-theme = "Papirus-Dark";
+                    gtk-theme = "Yaru-dark";
+                    icon-theme = "Yaru";
                 };
                 "org/gnome/mutter" = {
                     check-alive-timeout = lib.gvariant.mkUint32 30000;
@@ -18,7 +18,6 @@
                     experimental-features = ["variable-refresh-rate"];
                 };
                 "org/gnome/desktop/wm/preferences" = {
-                    theme = "adw-gtk3-dark";
                     button-layout = "appmenu:minimize,maximize,close";
                 };
                 "org/gnome/desktop/peripherals/keyboard" = {
@@ -43,6 +42,9 @@
                         "steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
+                };
+                "org/gnome/shell/extensions/user-theme" = {
+                    name = "Yaru-dark";
                 };
                 "org/gnome/shell/extensions/dash-to-dock" = {
                     background-color = "rgb(0,0,0)";
