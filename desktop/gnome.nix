@@ -19,8 +19,7 @@ in
         gnome-tour
         gnome-connections
         snapshot
-        gnome.gnome-shell-extensions
-    ]) ++ (with pkgs.gnome; [
+        gnome-shell-extensions
         # baobab          # disk usage analyzer
         epiphany        # web browser
         totem           # video player
@@ -43,7 +42,7 @@ in
         gnomeExtensions.dash-to-dock
         gnomeExtensions.appindicator
         gnomeExtensions.caffeine
-        gnome.gnome-tweaks
+        gnome-tweaks
         adw-gtk3
     ] ++ extra-gnome-extensions;
 

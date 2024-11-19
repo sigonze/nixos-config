@@ -2,7 +2,8 @@
 
 let
     fanatecff = config.boot.kernelPackages.callPackage ./hid-fanatecff {};
-    users-list = builtins.attrNames config.users.users;
+    all-users = builtins.attrNames config.users.users;
+    normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
 in
 {
     boot.extraModulePackages = [ fanatecff ];
@@ -15,6 +16,6 @@ in
 
     # add all user to games group (to grant r/w on sysfs)
     users.groups.games = {
-        members = users-list;
+        members = normal-users;
     };
 }

@@ -9,9 +9,10 @@ let
         "default" = pkgs.linuxPackages;
     };
     selected-kernel = builtins.getAttr (extra-config.kernel or "default") kernel-packages;
-    extra-kernel-options = extra-config.kernel-options or [];
 in
 {
     boot.kernelPackages = selected-kernel;
-    boot.kernelParams = extra-kernel-options;
+
+    # amd-pstate
+    boot.kernelParams = if builtins.elem "kvm-amd" config.boot.kernelModules then [ "amd_pstate=active" ] else [];
 }

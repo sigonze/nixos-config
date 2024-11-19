@@ -6,8 +6,9 @@
     environment.systemPackages = with pkgs; [
         vscodium
         gnumake
-        python3
-        python3Packages.requests
-        python3Packages.pygobject3
+        (python3.withPackages(ps: with ps; [
+            requests
+            pygobject3
+        ]))
     ];
 }

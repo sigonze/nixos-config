@@ -2,12 +2,7 @@
     "hostname": "nix-gaming",
     "users": [ "Nicolas" ],
     "sudoers": [ "Nicolas" ],
-
     "kernel": "lqx",
-    "kernel-options": [
-        "amd_pstate=active"
-    ],
-
     "groups": [
         "devtools",
         "gaming"
