@@ -40,12 +40,10 @@
         gnome-tweaks
         adw-gtk3
         papirus-icon-theme
-        yaru-theme
     ]) ++ (with pkgs.gnomeExtensions; [
         dash-to-dock
         appindicator
         caffeine
-        user-themes
     ]);
 
     programs.kdeconnect = {
