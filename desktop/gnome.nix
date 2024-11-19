@@ -42,6 +42,7 @@
         gnomeExtensions.caffeine
         gnome-tweaks
         adw-gtk3
+        papirus-icon-theme
     ];
 
     programs.kdeconnect = {

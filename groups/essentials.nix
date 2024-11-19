@@ -6,8 +6,8 @@
     environment.systemPackages = with pkgs; [
         bitwarden
         discord
-        libreoffice
-        hunspell
-        hunspellDicts.fr-moderne
+        # libreoffice
+        # hunspell
+        # hunspellDicts.fr-moderne
     ];
 }

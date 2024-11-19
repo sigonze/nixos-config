@@ -9,7 +9,7 @@
                     color-scheme = "prefer-dark";
                     enable-hot-corners = true;
                     gtk-theme = "adw-gtk3-dark";
-                    icon-theme = "Adwaita";
+                    icon-theme = "Papirus-Dark";
                 };
                 "org/gnome/mutter" = {
                     check-alive-timeout = lib.gvariant.mkUint32 30000;
@@ -40,7 +40,7 @@
                         "org.mozilla.firefox.desktop"
                         "com.bitwarden.desktop.desktop"
                         "com.discordapp.Discord.desktop"
-                        "com.valvesoftware.Steam.desktop"
+                        "steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
                 };
