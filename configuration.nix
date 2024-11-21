@@ -6,7 +6,7 @@
         ./host-configuration.nix
         ./drivers/printers.nix
         ./desktop/gnome.nix
-        # ./groups/essentials.nix
+        ./groups/essentials.nix
     ];
 
     # Bootloader

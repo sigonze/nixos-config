@@ -10,7 +10,7 @@
     services.xserver.desktopManager.gnome.enable = true;
 
     # fix wifi question mark icon in gnome
-    # networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
+    networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
 
     # Debloat Gnome
     environment.gnome.excludePackages = with pkgs; [
