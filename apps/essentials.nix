@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-    programs.firefox.enable = true;
+    imports = [
+        ./firefox.nix
+    ];
+    # programs.firefox.enable = true;
 
     environment.systemPackages = with pkgs; [
         bitwarden

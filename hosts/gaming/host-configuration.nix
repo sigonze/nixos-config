@@ -3,8 +3,8 @@
 {
     imports = [
         ./shared-partitions.nix
-        ./groups/devtools.nix
-        ./groups/gaming.nix
+        ./apps/devtools.nix
+        ./apps/gaming.nix
         ./drivers/fanatec.nix
     ];
 

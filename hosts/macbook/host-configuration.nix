@@ -2,7 +2,7 @@
 
 {
     imports = [
-        ./groups/devtools.nix
+        ./apps/devtools.nix
     ];
 
     # Hostname
