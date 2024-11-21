@@ -16,9 +16,6 @@
         efi.canTouchEfiVariables = true;
     };
 
-    # Enable zram
-    zramSwap.enable = true;
-
     # Enable fstrim
     services.fstrim.enable = true;
 
