@@ -11,4 +11,6 @@
             pygobject3
         ]))
     ];
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
