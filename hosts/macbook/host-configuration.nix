@@ -8,9 +8,6 @@
     # Hostname
     networking.hostName = "nix-mac";
 
-    # Enable zram
-    zramSwap.enable = true;
-
     # Users
     users.users.nicolas = {
         isNormalUser = true;

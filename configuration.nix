@@ -19,6 +19,9 @@
     # Enable fstrim
     services.fstrim.enable = true;
 
+    # Enable zram
+    zramSwap.enable = true;
+
     # Enable Firmware Service 
     services.fwupd.enable = true;
 
