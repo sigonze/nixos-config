@@ -21,10 +21,14 @@
         };
     };
 
-    swapDevices = [{ 
-        device = "/dev/disk/by-uuid/5beb1706-07b4-4234-98c4-03fc1ccea0d8";
-        options = [
-            "nofail"
-        ];
+    # swapDevices = [{ 
+    #     device = "/dev/disk/by-uuid/5beb1706-07b4-4234-98c4-03fc1ccea0d8";
+    #     options = [
+    #         "nofail"
+    #     ];
+    # }];
+    swapDevices = [{
+        device = "/var/lib/swapfile";
+        size = 16*1024;
     }];
 }

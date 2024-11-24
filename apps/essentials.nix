@@ -9,6 +9,7 @@
     environment.systemPackages = with pkgs; [
         bitwarden
         discord
+        # gparted
         # libreoffice
         # hunspell
         # hunspellDicts.fr-moderne

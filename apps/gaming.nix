@@ -30,8 +30,8 @@ in
     environment.systemPackages = with pkgs; [
         # protonplus
         # protontricks
-        mangohud
-        vulkan-tools
+        # mangohud
+        # vulkan-tools
         # heroic
     ];
 

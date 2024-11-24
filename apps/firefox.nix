@@ -83,6 +83,9 @@
                     "browser.newtabpage.activity-stream.showSponsored" = false;
                     "browser.newtabpage.activity-stream.system.showSponsored" = false;
                     "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+                    "network.trr.mode" = 2;
+                    "network.trr.custom_uri" = "https://dns.adguard-dns.com/dns-query";
+                    "network.trr.uri" = "https://dns.adguard-dns.com/dns-query";
                 };
             };
         };
