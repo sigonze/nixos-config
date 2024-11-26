@@ -28,6 +28,7 @@ in
 
     # Gaming apps
     environment.systemPackages = with pkgs; [
+        game-devices-udev-rules
         # protonplus
         # protontricks
         # mangohud

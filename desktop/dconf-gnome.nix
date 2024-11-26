@@ -36,9 +36,9 @@
                         "org.gnome.Nautilus.desktop"
                         "org.gnome.Console.desktop"
                         "codium.desktop"
-                        "org.mozilla.firefox.desktop"
-                        "com.bitwarden.desktop.desktop"
-                        "com.discordapp.Discord.desktop"
+                        "firefox.desktop"
+                        "bitwarden.desktop"
+                        "discord.desktop"
                         "steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
