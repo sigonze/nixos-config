@@ -19,6 +19,7 @@
                 };
                 "org/gnome/desktop/wm/preferences" = {
                     button-layout = "appmenu:minimize,maximize,close";
+                    theme = "adw-gtk3-dark";
                 };
                 "org/gnome/desktop/peripherals/keyboard" = {
                     numlock-state = true;

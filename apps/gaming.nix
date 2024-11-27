@@ -11,19 +11,21 @@ in
         enable32Bit = true;
     };
 
-    # Enable Gamemode
-    programs.gamemode.enable = true;
+    programs = {
+        # Gamemode
+        gamemode.enable = true;
 
-    # Steam
-    # hardware.steam-hardware.enable = true;
-    programs.steam = {
-        enable = true;
-        # package = pkgs.steam.override { extraEnv = { MANGOHUD = 1; }; };
-        gamescopeSession.enable = true;
-        remotePlay.openFirewall = true;
-        extraCompatPackages = with pkgs; [
-            proton-ge-bin
-        ];
+        # Steam
+        # hardware.steam-hardware.enable = true;
+        steam = {
+            enable = true;
+            # package = pkgs.steam.override { extraEnv = { MANGOHUD = 1; }; };
+            remotePlay.openFirewall = true;
+            extraCompatPackages = with pkgs; [
+                proton-ge-bin
+            ];
+        };
+
     };
 
     # Gaming apps

@@ -13,7 +13,7 @@
     networking.networkmanager.settings.connectivity.uri = "http://nmcheck.gnome.org/check_network_status.txt";
 
     # ensure gnome-settings-daemon udev rules
-    services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+    services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
     # Debloat Gnome
     environment.gnome.excludePackages = with pkgs; [
