@@ -51,7 +51,7 @@ in
     # Environmant varaibles for steam (needed for proton-ge && mangohud)
     environment.sessionVariables = {
         STEAM_EXTRA_COMPAT_TOOLS_PATHS="\${HOME}/.steam/root/compatibilitytools.d";
-        MANGOHUD_CONFIG="horizontal,hud_no_margin,cpu_stats,ram,gpu_name,gpu_stats,vram,fps,frametime=0,frame_timing=0,time,time_format=%H\\:%M";
+        # MANGOHUD_CONFIG="horizontal,hud_no_margin,cpu_stats,ram,gpu_name,gpu_stats,vram,fps,frametime=0,frame_timing=0,time,time_format=%H\\:%M";
     };
 
     # add all users to group gamemode

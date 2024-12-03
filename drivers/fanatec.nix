@@ -6,16 +6,26 @@ let
     normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
 in
 {
-    boot.extraModulePackages = [ fanatecff ];
-    services.udev.packages = [ fanatecff ];
-    boot.kernelModules = [ "hid-fanatec" ];
+    options.fanatec = {
+        enable = lib.mkOption {
+            type = with lib.types; bool;
+            default = false;
+            description = "Enable Fanatec Whell support";
+        };
+    };
 
-    environment.systemPackages = with pkgs; [
-        linuxConsoleTools                       # needed by udev rules
-    ];
+    config = lib.mkIf config.fanatec.enable {
+        boot.extraModulePackages = [ fanatecff ];
+        services.udev.packages = [ fanatecff ];
+        boot.kernelModules = [ "hid-fanatec" ];
 
-    # add all user to games group (to grant r/w on sysfs)
-    users.groups.games = {
-        members = normal-users;
+        environment.systemPackages = with pkgs; [
+            linuxConsoleTools                       # needed by udev rules
+        ];
+
+        # add all user to games group (to grant r/w on sysfs)
+        users.groups.games = {
+            members = normal-users;
+        };
     };
 }

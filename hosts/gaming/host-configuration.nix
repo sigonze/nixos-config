@@ -35,6 +35,8 @@
     zramSwap.priority = 100;
     boot.kernel.sysctl = {  "vm.swappiness" = 10; };
 
+    # Enable Fanatec Wheel
+    fanatec.enable = true;
 
     # Initial installation version (should not be modified)
     system.stateVersion = "24.11";
