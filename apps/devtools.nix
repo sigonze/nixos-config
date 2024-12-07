@@ -1,16 +1,25 @@
 { config, pkgs, lib, ... }:
 
+with lib;
 {
-    programs.git.enable = true;
+    options.apps = {
+        devtools = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Install development tools";
+        };
+    };
 
-    environment.systemPackages = with pkgs; [
-        vscodium
-        gnumake
-        (python3.withPackages(ps: with ps; [
-            requests
-            pygobject3
-        ]))
-    ];
+    config = mkIf config.apps.devtools {
+        programs.git.enable = true;
 
-    # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+        environment.systemPackages = with pkgs; [
+            vscodium
+            gnumake
+            (python3.withPackages(ps: with ps; [
+                requests
+                pygobject3
+            ]))
+        ];
+    };
 }

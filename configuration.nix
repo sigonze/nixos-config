@@ -4,9 +4,9 @@
     imports = [
         ./hardware-configuration.nix
         ./host-configuration.nix
-        ./drivers/printers.nix
+        ./drivers
         ./desktop/gnome.nix
-        ./apps/essentials.nix
+        ./apps
     ];
 
     # Bootloader
@@ -72,6 +72,12 @@
         pulse.enable = true;
     };
 
+    # Enable opengl drivers
+    hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+    };
+
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
@@ -95,6 +101,9 @@
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
+
+    # Preserve space by disabling documentation
+    documentation.nixos.enable = false;
 
     # Enable automatic upgrade
     # system.autoUpgrade.enable = true;

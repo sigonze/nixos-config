@@ -3,9 +3,6 @@
 {
     imports = [
         ./shared-partitions.nix
-        ./apps/devtools.nix
-        ./apps/gaming.nix
-        ./drivers/fanatec.nix
     ];
 
     # Hostname
@@ -37,6 +34,10 @@
 
     # Enable Fanatec Wheel
     fanatec.enable = true;
+
+    # Select Apps
+    apps.devtools = true;
+    apps.gaming = true;
 
     # Initial installation version (should not be modified)
     system.stateVersion = "24.11";

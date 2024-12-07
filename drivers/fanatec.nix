@@ -10,7 +10,7 @@ in
         enable = lib.mkOption {
             type = with lib.types; bool;
             default = false;
-            description = "Enable Fanatec Whell support";
+            description = "Enable Fanatec Wheel support";
         };
     };
 

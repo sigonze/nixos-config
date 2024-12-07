@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-    imports = [
-        ./apps/devtools.nix
-    ];
-
     # Hostname
     networking.hostName = "nix-mac";
 
@@ -25,6 +21,9 @@
 
     # Configure keyboard variant
     services.xserver.xkb.variant = "mac";
+
+    # Select Apps
+    apps.devtools = true;
 
     # Initial installation version (should not be modified)
     system.stateVersion = "24.05";
