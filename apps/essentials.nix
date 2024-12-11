@@ -3,16 +3,27 @@
 with lib;
 {
     imports = [
-        ./firefox.nix
+        ./config/firefox.nix
     ];
-    # programs.firefox.enable = true;
 
-    environment.systemPackages = with pkgs; [
-        bitwarden
-        discord
-        # gparted
-        # libreoffice
-        # hunspell
-        # hunspellDicts.fr-moderne
-    ];
+    options.apps = {
+        essentials = mkOption {
+            type = with types; bool;
+            default = true;
+            description = "Install essentials apps";
+        };
+    };
+
+    config = mkIf config.apps.essentials {
+        programs.firefox.enable = true;
+
+        environment.systemPackages = with pkgs; [
+            bitwarden
+            discord
+            # gparted
+            # libreoffice
+            # hunspell
+            # hunspellDicts.fr-moderne
+        ];
+    };
 }
