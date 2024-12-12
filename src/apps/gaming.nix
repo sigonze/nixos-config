@@ -18,11 +18,18 @@ in
             # Gamemode
             gamemode.enable = true;
 
+            # Gamescope
+            gamescope = {
+                enable = true;
+                capSysNice = true;
+            };
+
             # Steam
             # hardware.steam-hardware.enable = true;
             steam = {
                 enable = true;
                 # package = pkgs.steam.override { extraEnv = { MANGOHUD = 1; }; };
+                # gamescopeSession.enable = true;
                 remotePlay.openFirewall = true;
                 extraCompatPackages = with pkgs; [
                     proton-ge-bin
@@ -34,11 +41,7 @@ in
         # Gaming apps
         environment.systemPackages = with pkgs; [
             game-devices-udev-rules
-            # protonplus
-            # protontricks
             # mangohud
-            # vulkan-tools
-            # heroic
         ];
 
         # Rules to disable Dualshock touchpad
