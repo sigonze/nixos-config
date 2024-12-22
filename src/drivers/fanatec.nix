@@ -6,7 +6,7 @@ let
     normal-users = builtins.filter (user: config.users.users.${user}.isNormalUser == true) all-users;
 in
 {
-    options.fanatec = {
+    options.hardware.fanatec = {
         enable = lib.mkOption {
             type = with lib.types; bool;
             default = false;
@@ -14,7 +14,7 @@ in
         };
     };
 
-    config = lib.mkIf config.fanatec.enable {
+    config = lib.mkIf config.hardware.fanatec.enable {
         boot.extraModulePackages = [ fanatecff ];
         services.udev.packages = [ fanatecff ];
         boot.kernelModules = [ "hid-fanatec" ];

@@ -33,7 +33,7 @@
     boot.kernel.sysctl = {  "vm.swappiness" = 10; };
 
     # Enable Fanatec Wheel
-    fanatec.enable = true;
+    hardware.fanatec.enable = true;
 
     # Select Apps
     apps.devtools = true;
