@@ -9,7 +9,8 @@ with lib;
     options.apps = {
         essentials = mkOption {
             type = with types; bool;
-            default = true;
+            # default = true;
+            default = false;
             description = "Install essentials apps";
         };
     };

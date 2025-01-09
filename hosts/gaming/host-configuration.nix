@@ -35,9 +35,12 @@
     # Enable Fanatec Wheel
     hardware.fanatec.enable = true;
 
+    # Steam Hardware
+    hardware.steam-hardware.enable = true;
+
     # Select Apps
     apps.devtools = true;
-    apps.gaming = true;
+    # apps.gaming = true;
 
     # Initial installation version (should not be modified)
     system.stateVersion = "24.11";

@@ -68,14 +68,14 @@
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        alsa.support32Bit = true;
+        # alsa.support32Bit = true;
         pulse.enable = true;
     };
 
     # Enable opengl drivers
     hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+        # enable32Bit = true;
     };
 
     # Allow unfree packages

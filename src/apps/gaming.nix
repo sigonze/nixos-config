@@ -19,10 +19,10 @@ in
             gamemode.enable = true;
 
             # Gamescope
-            gamescope = {
-                enable = true;
-                capSysNice = true;
-            };
+            # gamescope = {
+            #     enable = true;
+            #     capSysNice = true;
+            # };
 
             # Steam
             # hardware.steam-hardware.enable = true;
