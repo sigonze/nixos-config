@@ -23,7 +23,7 @@
     zramSwap.enable = true;
 
     # Enable Firmware Service 
-    services.fwupd.enable = true;
+    # services.fwupd.enable = true;
 
     # Enable networking
     networking.networkmanager.enable = true;
@@ -106,12 +106,15 @@
     documentation.nixos.enable = false;
 
     # Enable automatic upgrade
-    # system.autoUpgrade.enable = true;
+    system.autoUpgrade = {
+        enable = true;
+        dates = "weekly";
+    };
 
     # Enable Garbage Collector
-    # nix.gc = {
-    #     automatic = true;
-    #     dates = "weekly";
-    #     options = "--delete-older-than 7d";
-    # };
+    nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+    };
 }
