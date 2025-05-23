@@ -97,6 +97,7 @@
         vim
         nvd
         fastfetch
+        unrar-wrapper
     ];
 
     # Optimise Store
