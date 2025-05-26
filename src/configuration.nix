@@ -107,15 +107,15 @@
     documentation.nixos.enable = false;
 
     # Enable automatic upgrade
-    system.autoUpgrade = {
-        enable = true;
-        dates = "weekly";
-    };
+    # system.autoUpgrade = {
+    #     enable = true;
+    #     dates = "weekly";
+    # };
 
     # Enable Garbage Collector
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
-    };
+    # nix.gc = {
+    #     automatic = true;
+    #     dates = "weekly";
+    #     options = "--delete-older-than 30d";
+    # };
 }
