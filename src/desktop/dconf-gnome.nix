@@ -42,11 +42,10 @@
                     favorite-apps = [
                         "org.gnome.Nautilus.desktop"
                         "org.gnome.Console.desktop"
-                        "codium.desktop"
-                        "firefox.desktop"
-                        "bitwarden.desktop"
-                        "discord.desktop"
-                        "steam.desktop"
+                        "code.desktop"
+                        "org.mozilla.firefox.desktop"
+                        "com.bitwarden.desktop.desktop"
+                        "com.valvesoftware.Steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
                 };

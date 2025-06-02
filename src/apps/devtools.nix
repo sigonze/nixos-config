@@ -14,8 +14,14 @@ with lib;
         programs.git.enable = true;
 
         environment.systemPackages = with pkgs; [
-            vscodium
             gnumake
+            (vscode-with-extensions.override { vscodeExtensions = with vscode-extensions; [
+                    bbenoist.nix
+                    mhutchie.git-graph
+                    github.vscode-pull-request-github
+                    # github.copilot
+                ];
+            })
             (python3.withPackages(ps: with ps; [
                 requests
                 pygobject3
