@@ -22,6 +22,7 @@
         snapshot
         gnome-shell-extensions
         # baobab          # disk usage analyzer
+        decibels        # audio player
         epiphany        # web browser
         totem           # video player
         yelp            # help viewer
