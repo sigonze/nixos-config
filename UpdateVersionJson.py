@@ -5,6 +5,7 @@ import requests
 import os
 import subprocess
 import logging
+import argparse
 
 
 version_files = [
@@ -79,7 +80,12 @@ def update_json_info(file_path):
 
 
 def main():
-    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
+    parser = argparse.ArgumentParser(description="Script to facilitate update version.json")
+    parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
+    args = parser.parse_args()
+
+    log_level = logging.DEBUG if args.verbose else logging.INFO
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=log_level)
 
     for file_path in version_files:
         try:
