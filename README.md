@@ -90,10 +90,16 @@ sudo make install HOST=macbook
 Note: if `hardware-configuration` file has changed it will ask for confirmation to insure it is not a mistake.
 
 
-## Fanatec Wheel driver update
+## Fanatec Wheel driver
+
 Based on deleted package [PhilT/hid-fanatecff](https://github.com/PhilT/nixos-files/blob/f986b126212368a8eab702d2cb28f234e3b4230a/src/hid-fanatecff/default.nix)
 
-To update to a new version hid-fanatecff, the file `drivers/hid-fanatecff/default.nix` has to be updated, as described:
+### Automatic update
+From the root of the repository just call the python script `./UpdateVersionJson.py`.
+It will check which is the latest release on [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags) and update the file `src/drivers/hid-fanatecff/version.json` relatively if needed.
+
+### Manual update
+To update manually, the file `src/drivers/hid-fanatecff/version.json` has to be updated, as described:
 1) update `version` using latest tag in [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags)
 2) update `sha256` based on the latest tag (here 0.1.2 as example):
 ```
