@@ -20,11 +20,10 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             bitwarden
-            discord
-            # gparted
+            # discord
             # libreoffice
             # hunspell
-            # hunspellDicts.fr-moderne
+            # hunspellDicts.fr-any
         ];
     };
 }

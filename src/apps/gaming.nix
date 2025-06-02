@@ -16,20 +16,12 @@ in
     config = lib.mkIf config.apps.gaming {
         programs = {
             # Gamemode
-            gamemode.enable = true;
-
-            # Gamescope
-            # gamescope = {
-            #     enable = true;
-            #     capSysNice = true;
-            # };
+            # gamemode.enable = true;
 
             # Steam
             # hardware.steam-hardware.enable = true;
             steam = {
                 enable = true;
-                # package = pkgs.steam.override { extraEnv = { MANGOHUD = 1; }; };
-                # gamescopeSession.enable = true;
                 remotePlay.openFirewall = true;
                 extraCompatPackages = with pkgs; [
                     proton-ge-bin
@@ -41,7 +33,6 @@ in
         # Gaming apps
         environment.systemPackages = with pkgs; [
             game-devices-udev-rules
-            mangohud
         ];
 
         # Rules to disable Dualshock touchpad
@@ -57,7 +48,6 @@ in
         # Environment variables for steam (needed for proton-ge && mangohud)
         environment.sessionVariables = {
             STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-            # MANGOHUD_CONFIG = "control=mangohud,legacy_layout=0,horizontal,battery,time,time_format=%H\\:%M,gpu_stats,gpu_power,cpu_stats,ram,vram,fps,frametime=1,frame_timing=1,hud_no_margin,table_columns=14";
         };
 
         # add all users to group gamemode
