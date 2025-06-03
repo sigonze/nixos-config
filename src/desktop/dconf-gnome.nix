@@ -42,7 +42,7 @@
                     favorite-apps = [
                         "org.gnome.Nautilus.desktop"
                         "org.gnome.Console.desktop"
-                        "code.desktop"
+                        "codium.desktop"
                         "org.mozilla.firefox.desktop"
                         "com.bitwarden.desktop.desktop"
                         "com.valvesoftware.Steam.desktop"

@@ -15,7 +15,9 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             gnumake
-            (vscode-with-extensions.override { vscodeExtensions = with vscode-extensions; [
+            (vscode-with-extensions.override { 
+                vscode = vscodium;
+                vscodeExtensions = with vscode-extensions; [
                     bbenoist.nix
                     mhutchie.git-graph
                     github.vscode-pull-request-github
