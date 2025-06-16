@@ -15,17 +15,20 @@ in
 
     config = lib.mkIf config.apps.gaming {
         programs = {
-            # Gamemode
-            # gamemode.enable = true;
+            gamemode.enable = true;
+            gamescope.enable = true;
 
-            # Steam
-            # hardware.steam-hardware.enable = true;
             steam = {
                 enable = true;
                 remotePlay.openFirewall = true;
                 extraCompatPackages = with pkgs; [
                     proton-ge-bin
                 ];
+                package = pkgs.steam.override {
+                    extraPkgs = pkgs: with pkgs; [
+                        adwaita-icon-theme
+                    ];
+                };
             };
 
         };
@@ -33,6 +36,7 @@ in
         # Gaming apps
         environment.systemPackages = with pkgs; [
             game-devices-udev-rules
+            heroic
         ];
 
         # Rules to disable Dualshock touchpad

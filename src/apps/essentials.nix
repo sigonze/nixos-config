@@ -2,15 +2,15 @@
 
 with lib;
 {
-    imports = [
-        ./config/firefox.nix
-    ];
+    # imports = [
+    #     ./config/firefox.nix
+    # ];
 
     options.apps = {
         essentials = mkOption {
             type = with types; bool;
-            # default = true;
-            default = false;
+            default = true;
+            # default = false;
             description = "Install essentials apps";
         };
     };

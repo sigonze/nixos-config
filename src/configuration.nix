@@ -68,21 +68,21 @@
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        # alsa.support32Bit = true;
+        alsa.support32Bit = true;
         pulse.enable = true;
     };
 
     # Enable opengl drivers
     hardware.graphics = {
         enable = true;
-        # enable32Bit = true;
+        enable32Bit = true;
     };
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
     # Activate Flatpak
-    services.flatpak.enable = true;
+    # services.flatpak.enable = true;
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
