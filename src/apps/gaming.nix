@@ -20,15 +20,11 @@ in
 
             steam = {
                 enable = true;
+                gamescopeSession.enable = true;
                 remotePlay.openFirewall = true;
                 extraCompatPackages = with pkgs; [
                     proton-ge-bin
                 ];
-                package = pkgs.steam.override {
-                    extraPkgs = pkgs: with pkgs; [
-                        adwaita-icon-theme
-                    ];
-                };
             };
 
         };
@@ -37,6 +33,7 @@ in
         environment.systemPackages = with pkgs; [
             game-devices-udev-rules
             heroic
+            mangohud
         ];
 
         # Rules to disable Dualshock touchpad
