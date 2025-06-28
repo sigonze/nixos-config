@@ -34,6 +34,8 @@ in
             game-devices-udev-rules
             heroic
             mangohud
+            protonplus
+            protontricks
         ];
 
         # Rules to disable Dualshock touchpad
