@@ -89,9 +89,9 @@
 
     # Add aliases
     programs.bash.shellAliases = {
-        nixos_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-        nixos_update = "sudo sh -c \"nix-channel --update && nixos-rebuild boot\"";
-        nixos_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild boot\"";
+        nix_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
+        nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild boot\"";
+        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild boot\"";
     };
 
     # Base apps
@@ -101,6 +101,13 @@
         fastfetch
         unrar-wrapper
     ];
+
+    system.activationScripts.report-changes = ''
+        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then 
+            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2) 
+        fi;
+    '';
 
     # Optimise Store
     nix.settings.auto-optimise-store = true;
