@@ -2,10 +2,6 @@
 
 with lib;
 {
-    imports = [
-        ./config/firefox.nix
-    ];
-
     options.apps = {
         essentials = mkOption {
             type = with types; bool;
@@ -16,6 +12,7 @@ with lib;
 
     config = mkIf config.apps.essentials {
         programs.firefox.enable = true;
+        programs.firefox.package = pkgs.firefox-esr;
 
         environment.systemPackages = with pkgs; [
             bitwarden

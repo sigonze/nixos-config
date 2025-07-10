@@ -90,8 +90,8 @@
     # Add aliases
     programs.bash.shellAliases = {
         nix_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-        nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild boot\"";
-        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild boot\"";
+        nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild switch\"";
+        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch\"";
     };
 
     # Base apps
@@ -102,11 +102,9 @@
         unrar-wrapper
     ];
 
-    system.activationScripts.report-changes = ''
-        if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then 
-            PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-            nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2) 
-        fi;
+    system.activationScripts.diff-gens = ''
+      PATH=$PATH:${lib.makeBinPath [ pkgs.nix ]}
+      ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
     '';
 
     # Optimise Store

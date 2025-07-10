@@ -43,8 +43,6 @@
     environment.systemPackages = (with pkgs; [
         gnome-tweaks
         adw-gtk3
-        # papirus-icon-theme
-        # flat-remix-icon-theme
     ]) ++ (with pkgs.gnomeExtensions; [
         dash-to-dock
         appindicator
