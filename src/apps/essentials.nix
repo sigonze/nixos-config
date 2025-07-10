@@ -11,8 +11,10 @@ with lib;
     };
 
     config = mkIf config.apps.essentials {
-        programs.firefox.enable = true;
-        programs.firefox.package = pkgs.firefox-esr;
+        programs.firefox = {
+            enable = true;
+            package = pkgs.firefox-esr;
+        };
 
         environment.systemPackages = with pkgs; [
             bitwarden

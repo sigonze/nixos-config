@@ -43,9 +43,9 @@
                         "org.gnome.Nautilus.desktop"
                         "org.gnome.Console.desktop"
                         "codium.desktop"
-                        "org.mozilla.firefox.desktop"
-                        "com.bitwarden.desktop.desktop"
-                        "com.valvesoftware.Steam.desktop"
+                        "firefox-esr.desktop"
+                        "bitwarden.desktop"
+                        "steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
                 };
