@@ -84,6 +84,12 @@
     # Activate Flatpak
     # services.flatpak.enable = true;
 
+    # Enable AppImage
+    programs.appimage = {
+        enable = true;
+        binfmt = true;
+    };
+
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
