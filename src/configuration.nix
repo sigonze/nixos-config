@@ -2,8 +2,6 @@
 
 {
     imports = [
-        ./hardware-configuration.nix
-        ./host-configuration.nix
         ./drivers
         ./desktop/gnome.nix
         ./apps
@@ -96,8 +94,8 @@
     # Add aliases
     programs.bash.shellAliases = {
         nix_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-        nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild switch\"";
-        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch\"";
+        # nix_update = "sudo sh -c \"nix flake update --flake /etc/nixos && nixos-rebuild switch --flake /etc/nixos\"";
+        # nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch --flake /etc/nixos\"";
     };
 
     # Base apps

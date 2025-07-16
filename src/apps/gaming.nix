@@ -34,8 +34,6 @@ in
             game-devices-udev-rules
             heroic
             mangohud
-            # protonplus
-            # protontricks
         ];
 
         # Rules to disable Dualshock touchpad
@@ -48,7 +46,7 @@ in
             ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
         '';
 
-        # Environment variables for steam (needed for proton-ge && mangohud)
+        # Environment variables for steam
         environment.sessionVariables = {
             STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
         };
