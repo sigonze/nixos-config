@@ -116,6 +116,9 @@
     # Optimise Store
     nix.settings.auto-optimise-store = true;
 
+    # Add Flakes
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     # Preserve space by disabling documentation
     documentation.nixos.enable = false;
 
