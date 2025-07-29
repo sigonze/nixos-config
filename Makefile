@@ -86,8 +86,8 @@ test: check-host
 # Update the configuration & rebuild NixOS
 install: check-admin check-host check-hwconf
 	$(call cfg_copy,/etc/nixos)
-	nixos-rebuild boot
-	$(call nix_diff)
+	nixos-rebuild switch
+#	$(call nix_diff)
 
 
 # Clean local build
@@ -99,14 +99,14 @@ clean:
 # Delete old generations
 mr_proper: check-admin
 	nix-collect-garbage -d
-	nixos-rebuild boot
+	nixos-rebuild switch
 
 
 # Update NixOS
 update: check-admin
 	nix-channel --update
-	nixos-rebuild boot
-	$(call nix_diff)
+	nixos-rebuild switch
+#	 $(call nix_diff)
 
 
 .PHONY: all test clean check-admin check-host check-hwconf
