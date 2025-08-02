@@ -32,10 +32,11 @@
     hardware.fanatec.enable = true;
 
     # Steam Hardware
-    # hardware.steam-hardware.enable = true;
+    hardware.steam-hardware.enable = true;
 
     # Select Apps
     apps.devtools = true;
+    apps.essentials = true;
     apps.gaming = true;
 
     # Initial installation version (should not be modified)
