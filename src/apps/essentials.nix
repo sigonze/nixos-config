@@ -18,6 +18,7 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             bitwarden
+            discord
             calibre
             libreoffice
             hunspell

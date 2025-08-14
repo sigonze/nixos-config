@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+    imports = [
+        ./hardware-configuration.nix
+    ];
+
     # Hostname
     networking.hostName = "nix-mac";
 

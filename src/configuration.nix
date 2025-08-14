@@ -2,7 +2,6 @@
 
 {
     imports = [
-        ./hardware-configuration.nix
         ./host-configuration.nix
         ./drivers
         ./desktop/gnome.nix
@@ -68,14 +67,14 @@
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        alsa.support32Bit = true;
+        # alsa.support32Bit = true;
         pulse.enable = true;
     };
 
     # Enable opengl drivers
     hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+        # enable32Bit = true;
     };
 
     # Allow unfree packages
@@ -85,10 +84,10 @@
     # services.flatpak.enable = true;
 
     # Enable AppImage
-    programs.appimage = {
-        enable = true;
-        binfmt = true;
-    };
+    # programs.appimage = {
+    #     enable = true;
+    #     binfmt = true;
+    # };
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;

@@ -2,6 +2,7 @@
 
 {
     imports = [
+        ./hardware-configuration.nix
         ./shared-partitions.nix
     ];
 
@@ -19,7 +20,7 @@
     services.xserver.xkb.variant = "oss";
 
     # Select Kernel
-    # boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
     # amd-pstate
     boot.kernelParams = [ "amd_pstate=active" ];
