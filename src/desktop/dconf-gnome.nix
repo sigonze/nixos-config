@@ -9,7 +9,7 @@
                     color-scheme = "prefer-dark";
                     enable-hot-corners = true;
                     gtk-theme = "adw-gtk3-dark";
-                    # icon-theme = "Papirus-Dark";
+                    icon-theme = "Papirus-Dark";
                 };
                 "org/gnome/mutter" = {
                     check-alive-timeout = lib.gvariant.mkUint32 30000;
@@ -45,6 +45,7 @@
                         "codium.desktop"
                         "firefox-esr.desktop"
                         "bitwarden.desktop"
+                        "discord.desktop"
                         "steam.desktop"
                         "com.heroicgameslauncher.hgl.desktop"
                     ];
