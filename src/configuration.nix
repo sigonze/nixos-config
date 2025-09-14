@@ -94,6 +94,9 @@
     # Add aliases
     programs.bash.shellAliases = {
         nix_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
+        nix_update = "sudo sh -c \"nix flake update --flake /etc/nixos && nixos-rebuild boot --flake /etc/nixos\" && nvd diff /run/current-system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)";
+        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch --flake /etc/nixos\"";
+
     };
 
     # Base apps
