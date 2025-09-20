@@ -1,8 +1,11 @@
 { config, pkgs, lib, ... }:
 
+let
+    target = builtins.readFile ./target.cfg;
+in
 {
     imports = [
-        ./host-configuration.nix
+        ./hosts/${target}/host-configuration.nix
         ./drivers
         ./desktop/gnome.nix
         ./apps

@@ -2,26 +2,20 @@
 _NC_     := \033[0m
 _BOLD_   := \033[1m
 _RED_    := \033[0;31m
-_GREEN_  := \033[0;32m
 _YELLOW_ := \033[0;33m
-_BLUE_   := \033[0;34m
-_PURPLE_ := \033[0;36m
-_CYAN_   := \033[0;36m
-_WHITE_  := \033[0;37m
-
 
 # Check if config.mk exists before including it
-ifneq ("$(wildcard config.mk)","")
-include config.mk
-else
-$(warning Configuration file config.mk does not exist)
-endif
+# ifneq ("$(wildcard config.mk)","")
+# include config.mk
+# else
+# $(warning Configuration file config.mk does not exist)
+# endif
 
 
 # Macro to copy current configuration (only nix files) in the given directory
 define cfg_copy
 	@if [ -d "$(1)" ]; then \
-		rsync -ar --out-format="%n" --delete-after src/ hosts/$(HOST)/ $(1); \
+		rsync -ar --out-format="%n" --delete-after src/ $(1); \
 	else \
 		echo -e "$(_RED_)error:$(_NC_) directory $(1) not found"; \
 		exit 1; \
@@ -46,19 +40,23 @@ endef
 # make without argument will perform a test & clean
 all: test clean
 
-
-# check if HOST has be provided
-check-host:
-ifndef HOST
-	@echo -e "$(_RED_)error:$(_NC_) HOST variable not provided"; \
-	exit 1
+TARGET_FILE := src/target.cfg
+ifneq ("$(wildcard $(TARGET_FILE))", "")
+    TARGET := $(shell cat $(TARGET_FILE))
 endif
-	@test -d "hosts/$(HOST)" || (echo -e "$(_RED_)error:$(_NC_) directory hosts/$(HOST) does not exist" && exit 1)
+
+# check if TARGET has be provided
+check-host:
+ifndef TARGET
+	@echo -e "$(_RED_)error:$(_NC_) target name is missing in $(TARGET_FILE)"; \
+	exit 1
+endif	
+	@test -d "src/hosts/$(TARGET)" || (echo -e "$(_RED_)error:$(_NC_) directory src/hosts/$(TARGET) does not exist" && exit 1)
 
 
 # check if hardware-configuration has changed (should not in 99% of the cases)
 check-hwconf:
-	@diff hosts/$(HOST)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
+	@diff src/hosts/$(TARGET)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
 	if [ $$? -ne 0 ]; then \
 		echo -e "$(_YELLOW_)warning:$(_NC_) hardware-configuration.nix has changed!"; \
 		echo -e "It may BREAK your system if you do not know what you are doing."; \
