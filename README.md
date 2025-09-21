@@ -6,24 +6,21 @@ NixOS configuration (for my Gaming PC and my old Macbook Pro 11)
 ## How to use
 
 ### Configure your HOST (should be done only once)
-Create a configuration file `config.mk` to specify your current host and put the files related to your host in the folder `hosts/<hostname>`.
-Note: this file is optionnal if you specify the HOST for each command (for instance `HOST=gaming`)
+Create a configuration file `target.cfg` into `src` folder to specify your current host and put the files related to your host in the folder `src/hosts/<hostname>`.
 Its content should be something like this:
 ```
-ifndef HOST
-	HOST=gaming
-endif
+gaming
 ```
 
 Two example are avaible and may be reused.
 For my Gaming PC:
 ```
-cp config.gaming.mk config.mk
+cp target.gaming.cfg target.cfg
 ```
 
 For my Macbook Pro:
 ```
-cp config.macbook.mk config.mk
+cp target.macbook.cfg target.cfg
 ```
 
 ### Test the NixOS configuration
@@ -58,36 +55,15 @@ sudo make mr_proper
 ```
 
 ### Perform a dry-run (only)
-With the HOST specified in `config.mk` file
+With the HOST specified in `src/target.cfg` file
 ```
 make test
-```
-
-Or for a specific host
-```
-make test HOST=gaming
-```
-or
-```
-make test HOST=macbook
 ```
 
 ### Perform a local clean (typically after test command)
 ```
 make clean
 ```
-
-### Install and rebuild NixOS for another HOST than the one specified in `config.mk` file.
-Careful here your may break your installation. But since the update is applied after the restart, you norammly only have to choose the previous configuration to restart and to fix.
-```
-sudo make install HOST=gaming
-```
-or
-
-```
-sudo make install HOST=macbook
-```
-Note: if `hardware-configuration` file has changed it will ask for confirmation to insure it is not a mistake.
 
 
 ## Fanatec Wheel driver
@@ -96,7 +72,7 @@ Based on deleted package [PhilT/hid-fanatecff](https://github.com/PhilT/nixos-fi
 
 ### Automatic update
 From the root of the repository just call the python script `./UpdateVersionJson.py`.
-It will check which is the latest release on [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags) and update the file `src/drivers/hid-fanatecff/version.json` relatively if needed.
+It will check which is the latest release on [gotzl/hid-fanatecff](https://github.com/gotzl/hid-fanatecff/tags) and update the file `src/drivers/hid-fanatecff/version.json` if needed.
 
 ### Manual update
 To update manually, the file `src/drivers/hid-fanatecff/version.json` has to be updated, as described:
