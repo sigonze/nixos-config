@@ -2,14 +2,6 @@
 _NC_     := \033[0m
 _BOLD_   := \033[1m
 _RED_    := \033[0;31m
-_YELLOW_ := \033[0;33m
-
-# Check if config.mk exists before including it
-# ifneq ("$(wildcard config.mk)","")
-# include config.mk
-# else
-# $(warning Configuration file config.mk does not exist)
-# endif
 
 
 # Macro to copy current configuration (only nix files) in the given directory
@@ -40,34 +32,6 @@ endef
 # make without argument will perform a test & clean
 all: test clean
 
-TARGET_FILE := src/target.cfg
-ifneq ("$(wildcard $(TARGET_FILE))", "")
-    TARGET := $(shell cat $(TARGET_FILE))
-endif
-
-# check if TARGET has be provided
-check-host:
-ifndef TARGET
-	@echo -e "$(_RED_)error:$(_NC_) target name is missing in $(TARGET_FILE)"; \
-	exit 1
-endif	
-	@test -d "src/hosts/$(TARGET)" || (echo -e "$(_RED_)error:$(_NC_) directory src/hosts/$(TARGET) does not exist" && exit 1)
-
-
-# check if hardware-configuration has changed (should not in 99% of the cases)
-check-hwconf:
-	@diff src/hosts/$(TARGET)/hardware-configuration.nix /etc/nixos/hardware-configuration.nix > /dev/null; \
-	if [ $$? -ne 0 ]; then \
-		echo -e "$(_YELLOW_)warning:$(_NC_) hardware-configuration.nix has changed!"; \
-		echo -e "It may BREAK your system if you do not know what you are doing."; \
-		echo -e "$(_BOLD_)Do you want to continue (y/N)?$(_NC_)"; \
-		read answer; \
-		if [ "$$answer" != "y" ]; then \
-			echo "Abort"; \
-			exit 1; \
-		fi; \
-	fi;
-
 
 # Check admin rights
 check-admin:
@@ -75,14 +39,14 @@ check-admin:
 
 
 # Test the configuration locally
-test: check-host
+test:
 	@mkdir -p test
 	$(call cfg_copy,test)
 	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
 
 
 # Update the configuration & rebuild NixOS
-install: check-admin check-host check-hwconf
+install: check-admin
 	$(call cfg_copy,/etc/nixos)
 	nixos-rebuild boot
 	$(call nix_diff)
@@ -107,4 +71,4 @@ update: check-admin
 	 $(call nix_diff)
 
 
-.PHONY: all test clean check-admin check-host check-hwconf
+.PHONY: all test clean check-admin

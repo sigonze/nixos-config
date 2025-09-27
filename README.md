@@ -15,12 +15,12 @@ gaming
 Two example are avaible and may be reused.
 For my Gaming PC:
 ```
-cp target.gaming.cfg target.cfg
+cp target.gaming.cfg src/target.cfg
 ```
 
 For my Macbook Pro:
 ```
-cp target.macbook.cfg target.cfg
+cp target.macbook.cfg src/target.cfg
 ```
 
 ### Test the NixOS configuration
