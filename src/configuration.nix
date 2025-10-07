@@ -35,6 +35,7 @@ in
 
     # Set your time zone
     time.timeZone = "Europe/Paris";
+    # time.hardwareClockInLocalTime = true;
 
     # Select internationalisation properties
     i18n.defaultLocale = "fr_FR.UTF-8";
@@ -96,11 +97,43 @@ in
     services.openssh.enable = true;
 
     # Add aliases
-    programs.bash.shellAliases = {
-        nix_diff = "if [ $(ls -dv /nix/var/nix/profiles/system-*-link | wc -l) -gt 1 ]; then nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2); fi";
-        nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild boot\" && nvd diff /run/current-system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)";
-        nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch\"";
-    };
+    # programs.bash.shellAliases = {
+    #     nix_diff = "$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1) nvd diff /run/current-system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2 | head -1)";
+    #     nix_update = "sudo sh -c \"nix-channel --update && nixos-rebuild boot\" && nvd diff /run/current-system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)";
+    #     nix_clean = "sudo sh -c \"nix-collect-garbage -d && nixos-rebuild switch\"";
+    # };
+
+    programs.bash.interactiveShellInit = ''
+    function nix_diff() {
+        # Get the most recent system profile link
+        latest_profile=$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
+
+        # Resolve the targets of both symlinks
+        latest_profile_target=$(readlink -f "$latest_profile")
+        current_system_target=$(readlink -f /run/current-system)
+
+        if [[ "$latest_profile_target" == "$current_system_target" ]]; then
+            # If the latest profile points to the current system's target
+            previous_profile=$(ls -dv /nix/var/nix/profiles/system-*-link | tail -2 | head -1)
+            nvd diff /run/current-system "$previous_profile"
+        else
+            # If not, compare the current system with the latest profile
+            nvd diff /run/current-system "$latest_profile"
+        fi
+    }
+
+    function nix_update() {
+        sudo sh -c "nix-channel --update && nixos-rebuild boot"
+
+        # Compare the current system with the latest profile
+        nvd diff /run/current-system $(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)
+    }
+
+    function nix_clean() {
+        # Collect garbage and rebuild the system configuration
+        sudo sh -c "nix-collect-garbage -d && nixos-rebuild switch"
+    }
+    '';
 
     # Base apps
     environment.systemPackages = with pkgs; [
@@ -118,6 +151,9 @@ in
 
     # Preserve space by disabling documentation
     documentation.nixos.enable = false;
+
+    # Add ltunify
+    # hardware.logitech.wireless.enable = true;
 
     # Enable automatic upgrade
     # system.autoUpgrade = {

@@ -40,9 +40,7 @@ check-admin:
 
 # Test the configuration locally
 test:
-	@mkdir -p test
-	$(call cfg_copy,test)
-	nixos-rebuild dry-build -I nixos-config=test/configuration.nix
+	nixos-rebuild dry-build -I nixos-config=src/configuration.nix
 
 
 # Update the configuration & rebuild NixOS
