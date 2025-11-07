@@ -20,7 +20,7 @@
     services.xserver.xkb.variant = "oss";
 
     # Select Kernel
-    boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    # boot.kernelPackages = pkgs.linuxPackages_xanmod;
     # boot.kernelPackages = pkgs.linuxPackages_zen;
 
     # amd-pstate
@@ -30,15 +30,14 @@
     zramSwap.priority = 100;
     boot.kernel.sysctl = {  "vm.swappiness" = 10; };
 
-    # Enable Fanatec Wheel
+    # Enable Gaming Devices
     hardware.fanatec.enable = true;
-
-    # Steam Hardware
-    # hardware.steam-hardware.enable = true;
+    hardware.gaming.enable = true;
 
     # Select Apps
     apps.devtools = true;
-    apps.gaming = true;
+    apps.essentials = false;
+    apps.gaming = false;
 
     # Initial installation version (should not be modified)
     system.stateVersion = "24.11";

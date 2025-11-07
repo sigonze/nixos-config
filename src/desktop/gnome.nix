@@ -46,6 +46,8 @@
         papirus-icon-theme
     ]) ++ (with pkgs.gnomeExtensions; [
         dash-to-dock
+        # dash-to-panel
+        # just-perfection
         appindicator
         caffeine
     ]);

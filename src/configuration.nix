@@ -85,7 +85,7 @@ in
     nixpkgs.config.allowUnfree = true;
 
     # Activate Flatpak
-    # services.flatpak.enable = true;
+    services.flatpak.enable = true;
 
     # Enable AppImage
     # programs.appimage = {

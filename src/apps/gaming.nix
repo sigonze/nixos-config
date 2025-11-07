@@ -14,6 +14,8 @@ in
     };
 
     config = lib.mkIf config.apps.gaming {
+        hardware.gaming.enable = true;
+
         programs = {
             gamemode.enable = true;
             gamescope.enable = true;
@@ -31,22 +33,11 @@ in
 
         # Gaming apps
         environment.systemPackages = with pkgs; [
-            game-devices-udev-rules
             heroic
             mangohud
             # protonplus
             # protontricks
         ];
-
-        # Rules to disable Dualshock touchpad
-        services.udev.extraRules = ''
-            # USB
-            ATTRS{name}=="Sony Interactive Entertainment Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-            ATTRS{name}=="Sony Interactive Entertainment DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-            # Bluetooth
-            ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-            ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-        '';
 
         # Environment variables for steam (needed for proton-ge && mangohud)
         environment.sessionVariables = {
