@@ -47,7 +47,7 @@
 
     boot = {
         initrd.kernelModules = [ "wl" ];
-        kernelModules = [ "wl" "applesmc" "i915" ];
+        kernelModules = [ "wl" "applesmc" ];
         #kernelParams = [ "hid_apple.iso_layout=0" "acpi_backlight=vendor" "acpi_mask_gpe=0x15" ];
         extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
     };
