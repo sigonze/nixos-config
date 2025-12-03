@@ -46,31 +46,20 @@
     ];
 
     boot = {
-        initrd.kernelModules = [ "wl" ];
+        initrd.kernelModules = [ "wl" "i915" ];
         kernelModules = [ "wl" "applesmc" ];
-        #kernelParams = [ "hid_apple.iso_layout=0" "acpi_backlight=vendor" "acpi_mask_gpe=0x15" ];
         extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-    };
-
-    # Add Intel Haswell codecs
-    nixpkgs.config.packageOverrides = pkgs: {
-        intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };
 
     hardware.graphics = {
         enable = true;
         extraPackages = with pkgs; [
             intel-vaapi-driver
+            intel-ocl
             intel-media-driver
-            libva-vdpau-driver
-            libvdpau-va-gl
+            intel-compute-runtime
+            vpl-gpu-rt
         ];
-    };
-
-    # Fix GTK Haswell support
-    environment.variables = {
-        GSK_RENDERER = "ngl";
-        # LIBVA_DRIVER_NAME = "iHD";
     };
 
     # Select Apps
