@@ -3,16 +3,8 @@ _NC_     := \033[0m
 _BOLD_   := \033[1m
 _RED_    := \033[0;31m
 
-
-# Macro to copy current configuration (only nix files) in the given directory
-define cfg_copy
-	@if [ -d "$(1)" ]; then \
-		rsync -ar --out-format="%n" --delete-after src/ $(1); \
-	else \
-		echo -e "$(_RED_)error:$(_NC_) directory $(1) not found"; \
-		exit 1; \
-	fi
-endef
+FLAKE_DIR := .
+FLAKE_SUM := $(shell sha256sum $(FLAKE_DIR)/flake.lock)
 
 
 # Macro to perform nix diff
@@ -40,33 +32,35 @@ check-admin:
 
 # Test the configuration locally
 test:
-	nixos-rebuild dry-build -I nixos-config=src/configuration.nix
-
-
-# Update the configuration & rebuild NixOS
-install: check-admin
-	$(call cfg_copy,/etc/nixos)
-	nixos-rebuild boot
-	$(call nix_diff)
+	nixos-rebuild dry-build --flake $(FLAKE_DIR)
 
 
 # Clean local build
 clean:
 	nix-collect-garbage -d
-	@if [ -d "test" ]; then rm -r test; fi
 
 
 # Delete old generations
 mr_proper: check-admin
 	nix-collect-garbage -d
-	nixos-rebuild switch
+	nixos-rebuild switch --flake $(FLAKE_DIR)
 
 
 # Update NixOS
-update: check-admin
-	nix-channel --update
-	nixos-rebuild boot
-	 $(call nix_diff)
+update:
+	nix flake --extra-experimental-features "nix-command flakes" update --flake $(FLAKE_DIR)
+	@UPDATED_FLAKE_SUM=$$(sha256sum $(FLAKE_DIR)/flake.lock); \
+	if [ "$$UPDATED_FLAKE_SUM" != "$(FLAKE_SUM)" ]; then \
+		echo -e "$(_BOLD_)Flake was updated$(_NC_)"; \
+		sudo $(MAKE) rebuild; \
+	else \
+		echo -e "$(_BOLD_)No update$(_NC_)"; \
+	fi
+
+
+rebuild: check-admin
+	nixos-rebuild boot --flake $(FLAKE_DIR)
+	nvd diff "$(CURR_GEN)" "$$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)"
 
 
 .PHONY: all test clean check-admin

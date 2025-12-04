@@ -5,7 +5,6 @@ let
 in
 {
     imports = [
-        ./hosts/${target.host}/host-configuration.nix
         ./drivers
         ./desktop/gnome.nix
         ./apps
@@ -147,7 +146,7 @@ in
     nix.settings.auto-optimise-store = true;
 
     # Add Flakes
-    # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     # Preserve space by disabling documentation
     documentation.nixos.enable = false;

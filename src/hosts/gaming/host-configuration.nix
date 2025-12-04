@@ -20,7 +20,7 @@
     services.xserver.xkb.variant = "oss";
 
     # Select Kernel
-    # boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    boot.kernelPackages = pkgs.linuxPackages_xanmod;
     # boot.kernelPackages = pkgs.linuxPackages_zen;
 
     # amd-pstate
