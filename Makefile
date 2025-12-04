@@ -60,7 +60,7 @@ update:
 
 rebuild: check-admin
 	nixos-rebuild boot --flake $(FLAKE_DIR)
-	nvd diff "$(CURR_GEN)" "$$(ls -dv /nix/var/nix/profiles/system-*-link | tail -1)"
+	$(call nix_diff)
 
 
 .PHONY: all test clean check-admin

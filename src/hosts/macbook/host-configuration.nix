@@ -21,8 +21,6 @@
 #        extraGroups = [ "networkmanager" ];
 #    };
 
-    # hardware.facetimehd.enable = true;
-
     # Configure keyboard variant
     services.xserver.xkb.variant = "mac";
 
@@ -32,8 +30,7 @@
         # cpuFreqGovernor = "schedutil";
         powertop.enable = true;
     };
-    # services.auto-cpufreq.enable = true;
-    # networking.networkmanager.wifi.powersave = true;
+    networking.networkmanager.wifi.powersave = true;
     services.thermald.enable = true;
     services.mbpfan = {
         enable = true;
@@ -46,20 +43,9 @@
     ];
 
     boot = {
-        initrd.kernelModules = [ "wl" "i915" ];
-        kernelModules = [ "wl" "applesmc" ];
+        initrd.kernelModules = [ "wl" ];
+        kernelModules = [ "wl" ];
         extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-    };
-
-    hardware.graphics = {
-        enable = true;
-        extraPackages = with pkgs; [
-            intel-vaapi-driver
-            intel-ocl
-            intel-media-driver
-            intel-compute-runtime
-            vpl-gpu-rt
-        ];
     };
 
     # Select Apps
