@@ -24,7 +24,7 @@ in
     zramSwap.enable = true;
 
     # Enable Firmware Service 
-    # services.fwupd.enable = true;
+    services.fwupd.enable = true;
 
     # Enable networking
     networking.networkmanager.enable = true;
